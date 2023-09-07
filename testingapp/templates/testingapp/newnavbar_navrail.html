@@ -1,0 +1,2921 @@
+{% load static %}
+
+{% load i18n %}
+
+{% url 'landingpg' as landingpg %}
+{% url 'explore' as explore %}
+{% url 'signup' as signup %}
+{% url 'login' as login %}
+{% url 'topostlogin' recipes.id as topostlogin %}
+{% url 'home' as home %}
+{% url 'newnavbarnavrail' as newnavbarnavrail %}
+{% url 'newui' as newui %}
+
+
+
+
+
+{% url 'createpost' as createpost %}
+{% url 'search' as search %}
+{% url 'profile' as profile %}
+{% url 'trending' as trending %}
+{% url 'timeline' as timeline %}
+{% url 'aa' as aa %}
+{% url 'viewpost' post.id as viewpost %}
+{% url 'updateprofile' as updateprofile %}
+{% url 'updaterecipe' recipes.title recipes.id as updaterecipe %}
+<!-- {% url 'updateuserview' user.profile.id as updateuserview %} -->
+{% url 'updatepassword' as updatepassword %}
+{% url 'regusers' as regusers %}
+{% url 'navigationrail' as navigationrail %}
+{% url 'profiledetails' user.id as profiledetails %}
+{% url 'dashboard' as dashboard %}
+{% url 'blog_history' as blog_history %}
+{% url 'favourites' as favourites %}
+
+{% url 'account_settings' as account_settings %}
+
+
+
+{% url 'appearance' as appearance %}
+
+<!-- {% url 'user-profile-dashboard' user.id as userprofiledashboard %} -->
+{% url 'change-theme' as 'change-theme' %}
+{% url 'tailwind' as 'tailwind' %}
+
+
+{% url 'recap' slug='auth_user_recipes' as auth_user_recap %}
+{% url 'recap' slug='top10' as top10_recap %}
+{% url 'recap' slug='top10breakfast' as top10_bf_recap %}
+{% url 'recap' slug='top10lunch' as top10_lnch_recap %}
+{% url 'recap' slug='top10dinner' as top10_dnr_recap %}
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="icon" type="image/x-icon" href="{% static 'testingapp/media/logo2.ico' %}">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script> -->
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"> -->
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  
+  <link id="mystylesheet" rel="stylesheet" href="{% static 'testingapp/newnavbar_navrail.css' %}">
+  <link rel="stylesheet" href="{% static 'testingapp/newhome.css' %}">
+  <!-- <link rel="stylesheet" href="{% static 'testingapp/explore.css' %}"> -->
+
+  <link rel="stylesheet" href="{% static 'testingapp/landingpg.css' %}">
+
+  <link rel="stylesheet" href="{% static 'testingapp/animations.css' %}">
+
+
+  {% block css %}
+  {% endblock %}
+</head>
+
+{% if user.is_authenticated %}
+<style>
+
+    :root{
+        --primary_color: {{ user.userprofile.primary_color }};
+        --secondary_color: {{ user.userprofile.secondary_color }};
+        --tertiary_color: {{ user.userprofile.tertiary_color }};
+        --active_link_color: {{ user.userprofile.active_link_color }};
+        --hover_color: {{ user.userprofile.hover_color }};
+    }
+
+    #offcanvasExample,#color-preview-form1,.color-preview-navrail,.recipe-cards,.sidebar-cards,.reset-color-btn button,.logout-container,
+    .form-submit-btns button:not(.dark-theme-btns button),.scroll-icon,.qv-offcanvas,.tab-heading,.dashboard-recipe-cards,.explore-tab button,.top-profile-card,.img-del-btn .image-field .image-input,
+    .bottom-links a,.bottom-links button,.upro-first-row,.logoutmodal,.logoutmodal .modal-footer a,.single-recipe-delete .delete-link a,.timeline-tab-1 button,.timeline-tab-1 .dropdown-btn,
+    .dcp-forms button,.nb-rightimg-dropmenu,.hover-profile-card,.more-horiz-icon,.body-detail-dropdown-content,.trending-number,.recipe-img-preview-sidebar,
+    .form-btns button:first-child,.logout-link,.dropmenu-details-links,.recipe-details-1 .like-dislike-div button,.static-info-cards,.dynamic-recap-cards,
+    .img-input-btn,
+    .table-column,.columns,.footer-waveline,
+    
+    .autocomplete-items,.autocomplete-items div::before,.accordion-button,.timeline-tab-1 ul.dropdown-menu,.acc-set-child-containers{
+        background: var(--primary_color);
+    }
+
+
+    #color-preview-form2,#navoffcanvasbody,.primary-wrapper,.dynamic-recipes h1:not(.popular-card-container h1),.sidebar-header,.sidebar-header-h1,#history-card,
+    .qv-offcanvas-title-container,.qv-offcanvas-table-wrapper,.explore-tab,.timeline-tab-1,.dynamic-recipes h5,.top-profile-data,.logoutmodal .modal-body,.logoutmodal .modal-footer,
+    .nb-dropmenu-content,.dropmenu-details-wrapper:not(.dropmenu-details-links),.body-detail-dropdown-list .dropdown-first-child button,.body-detail-dropdown-list .dropdown-second-child,
+    .upro-second-row input,.upro-second-row textarea,.upro-second-row select,.navrail,.navbar,body,.logout-wrapper,.logoutmodal .modal-footer button,.autocomplete-items div,.tot_recipe_badge,.button-container button,
+    .spotlight-modal-content,.comments-offcanvas,.dashboard-card-body a:not(.stretched-link),.recap-card-type,.grid-container .columns:nth-child(6) .column-content button{
+        background: var(--secondary_color);
+    }
+
+    
+    .offcanvas-close-btn .close-btn-icon,.offcanvas-header h5,header h1,.dynamic-recipes h1:not(.popular-card-container h1),.sidebar-recipes h1,.sub-heading,.navbar-brand,.navbar-offcanvas-btn,
+    .offcanvas-body-links li a,.offcanvas-body-links li a .offcanvas-link-icons,.body-links-second h5,.body-links-third h5,.navrail-text,.navrail-icons,#navrail-text,#navrail-text2,#navrail-text-active,.dynamic-card-container a,
+    .form-submit-btns button:not(.dark-theme-btns button),.theme-container h4,.reset-color-btn button,.theme-sidebar p,.qv-offcanvas-title-container,.offcanvas-body-container hr,
+    .qv-offcanvas-table-wrapper table th,.qv-offcanvas-table-wrapper table td,.footer-area a,.tot_recipe_badge,.tab-heading,.scroll-icon,
+    .explore-tab button,.timeline-tab-1 button,.sidebar-dashboard-container h4,.sidebar-dashboard-container table,.sidebar-dashboard-container table tr th,.sidebar-dashboard-container table tr td,.sidebar-dashboard-container table caption,
+    .top-profile-data,.bottom-links a,.bottom-links button,.logoutmodal .modal-header,.logoutmodal .modal-body h2,.logoutmodal .modal-body p2,.logoutmodal .modal-footer button,.logoutmodal .modal-footer a,
+    #form-sub-btn:hover,#form-clear-btn,.dashboard-recipe-cards,.back-btn .back-btn-icon,.rightside-searchicon,.more-horiz-icon,.hover-profile-card,
+    .qv-offcanvas .offcanvas-header h5,.dcp-forms button,.nb-dropmenu-content,.dropmenu-details-wrapper,.recipe-form-container div label,
+    .like-dislike-icon,.total-likes,.total-dislikes,.body-detail-dropdown-list .dropdown-first-child button,.body-detail-dropdown-list .dropdown-second-child,.recipe-form-container .current-img-label,
+    .trending-number,.recipe-detail-table table,.recipe-body .recipe-body-content,.sidebar-usr-pro-dash h4,.sidebar-usr-pro-dash ul li,.user-detail-table table,.uprofile-form-label,
+    .dark-theme-container h4,.apply-darktheme-card h6,.upro-second-row input,.upro-second-row textarea,.upro-second-row select,.sidebar-dcp-form-container h5,.form-btns button,.logouticon,.tabcontent h6,.timeline-tab-1 span,.timeline-tab-1 .dropdown-btn,
+    .timeline-tab-1 .expand-icon,.settings-container,.button-container button,.spotlight-modal-content .modal-header,.user-detail-heading h2,.comments-section,.comments-offcanvas h5,.comments-accordian button,.recipe-details-1 .auth-name a,
+    .recap-card-type p,.recap-container,.recap-cards a,.recap-card-scrollspy a,.scrollspy-top-para,.recap-card-scrollspy a.active,.create-recipe-form .recipe-instruction-text,.sidebar-recipes h2,
+    .recipe-form-container .input-field input:not(.image-input),.recipe-form-container .input-field textarea,.recipe-form-container .select-options select,.recipe-form-container .select-options input,.img-del-btn .image-field .image-input,
+    .columns,.table-container h6,.table-container .table thead tr th,.table-container .table tbody tr th,.table-container .table tbody tr td,.grid-container .columns:nth-child(6) .column-content button,.table-container .table-column p,
+    .footer,.footer-container .column ul li a,.top-nb-dropmenu-content,
+
+    .rightside-searchbar .weather-widget,.autocomplete-items div,.accordion-button,.static-info-cards .card-info{
+        color: var(--tertiary_color);
+    }
+    
+    .recipe-form-container .select-options input::placeholder,
+    .recipe-form-container .input-field input::placeholder{
+        color: var(--tertiary_color);
+    }
+
+    #color-preview-form4,.navrail-icons-active,.quick-view:not(.popular-recipe-qv),.footer-area,.explore-tab button.active,.explore-tab button.clicked,.timeline-tab-1 button.active,.timeline-tab-1 button.clicked,
+    .sidebar-cards-qv,#form-sub-btn,.dashboard-card-body a:is(:hover, :focus),.dropmenu-details-wrapper .child-active,.more-dropdown-btn.show,.upro-second-row input::file-selector-button,
+    .accordion-button:not(.collapsed),.accordion .accordion-active,.year_recipe_badge,.offcanvas-body-links li a.active{
+        /* background: {{ user.userprofile.active_link_color }}; */
+        background: var(--active_link_color);
+    }
+
+    .more-dropdown-btn.show,.timeline-tab-1 .dropdown-btn.show,.timeline-tab-1 .dropdown-btn.active,.child-1 .form-input-switch input[type="checkbox"][role="switch"]:checked::before{
+        /* background: {{ user.userprofile.active_link_color }}; */
+        background: var(--active_link_color);
+    }
+
+    #color-preview-form5,.offcanvas-close-btn:hover,.navrail-links:hover .navrail-icons,.navbar-offcanvas-btn:hover,.offcanvas-body-list ul li:hover,
+    .form-submit-btns button:hover,.reset-color-btn button:hover,.quick-view:hover:not(.popular-recipe-qv),.scroll-icon:hover,.footer-area:hover,.explore-tab button:hover,
+    .explore-tab button.active:hover,.timeline-tab-1 button:hover,.timeline-tab-1 button.active:hover,.logoutmodal .modal-footer a:hover,
+    .logoutmodal .modal-footer .footerbtn:hover,.back-btn:hover,.sidebar-cards-qv:hover,#form-sub-btn:hover,#form-clear-btn:hover,.single-recipe-delete .delete-link a:hover,
+    .dcp-forms button:hover,.dropmenu-details-wrapper p:hover:not(.det-wrap-1 p),.body-detail-dropdown-list .dropdown-links:hover,.more-horiz-icon:hover,.logout-link.clicked,.logout-link:focus,
+    .logout-link:active,.deletemodal .modal-footer .footerbtn:hover,.accordion-button:hover,.timeline-tab-1 .dropdown-btn:hover,.button-container button:hover,.dropmenu-details-links a:hover,
+    .static-info-cards:hover,.recap-card-scrollspy a.active:hover,.recap-card-scrollspy a:hover,.rightside-searchbar h5:hover:not(.weather-widget),.img-del-btn .image-field .image-input:hover,
+    .img-input-btn:hover,.grid-container .columns:nth-child(6) .column-content button:hover,.top-nb-dropmenu-content a:hover,
+    
+    .upro-second-row,.logout-link::after,.sidebar-cards::after,.recipe-cards::after,.bottom-links a::after,.bottom-links button::after,
+    .form-btns button::after,.dashboard-recipe-cards::after{
+        /* background: {{ user.userprofile.hover_color }}; */
+        background: var(--hover_color);
+    }
+
+    .trending-number,.form-btns button:last-child{
+        /* border: 1px solid {{ user.userprofile.primary_color }}; */
+        border: 1px solid var(--primary_color);
+    }
+
+    .recipe-detail-container .left,.recipe-detail-container .right,.user-detail-table,.recipe-body .ingred-body{
+        border: 1.5px solid var(--primary_color);
+    }
+
+    .recipe-detail-table table th,.recipe-detail-table table td{
+        /* border-bottom: 0.5px solid {{ user.userprofile.active_link_color }}; */
+        border-bottom: 0.5px solid var(--primary_color);
+        color: var(--tertiary_color);
+    }
+
+    .user-detail-table table th,.user-detail-table table td,.uprofile-form-label:not(.uprofile-first-label),.uprofile-input{
+        /* border-bottom: 0.5px solid {{ user.userprofile.primary_color }}; */
+        border-bottom: 0.5px solid var(--primary_color);
+        color: var(--tertiary_color);
+    }
+
+    .recap-card-scrollspy a.active { 
+        border: 1px solid var(--tertiary_color);
+    }
+
+    .sidebar-usr-pro-dash ul li{
+        /* border-color: {{ user.userprofile.primary_color }}; */
+        border-color: var(--primary_color);
+    }
+
+    #form-clear-btn,.logoutmodal .modal-footer .footerbtn{
+        /* border: 1px solid {{ user.userprofile.primary_color }}; */
+        border: 1px solid var(--primary_color);
+    }
+
+    #color-preview-form3{
+        /* background: {{ user.userprofile.tertiary_color }}; */
+        background: var(--tertiary_color);
+    }
+
+    #form-clear-btn:hover,.form-btns button:last-child:hover,.logoutmodal .modal-footer .footerbtn:hover{
+        /* border: 1px solid {{ user.userprofile.hover_color }}; */
+        border: 1px solid var(--hover_color);
+    }
+    
+    .recipe-info .highlight,.sidebar-recipe-info .highlight,
+    .dashboard-recipe-cards .dashboard-card-body .highlight{
+        position: relative;
+        text-decoration: none;
+        /* background: linear-gradient({{ user.userprofile.tertiary_color }},{{ user.userprofile.tertiary_color }}) left bottom no-repeat; */
+        background: linear-gradient(var(--tertiary_color),var(--tertiary_color)) left bottom no-repeat;
+        background-size:0% 1px;
+        transition: all 0.4s;
+        display: inline;
+    }
+
+    .recipe-form-container .input-field input:not(.image-input),
+    .recipe-form-container .input-field textarea,
+    .recipe-form-container .select-options select,
+    .recipe-form-container .select-options input{
+        border-bottom: 2px solid var(--primary_color);
+    }
+
+    .recipe-form-container .input-field input:not(.image-input):hover,
+    .recipe-form-container .input-field textarea:hover,
+    .recipe-form-container .select-options select:hover,
+    .recipe-form-container .select-options input:hover{
+        border-bottom: 2px solid var(--tertiary_color);
+    }
+
+    .recipe-form-container .input-field input:focus,
+    .recipe-form-container .input-field textarea:focus,
+    .recipe-form-container .select-options select:focus,
+    .recipe-form-container .select-options input:focus{
+        border-bottom: 2px solid var(--tertiary_color);
+    }
+
+    .top-nb-dropmenu-content a{
+        border: 1.5px solid var(--tertiary_color);
+        color: var(--tertiary_color);
+    }
+
+</style>
+
+
+    {% if user.userprofile.theme == 'Dark theme' %}
+        <style>
+            .accordion-body:not(.all-recipes-cards){
+            background: rgba(25, 25, 25, 0.605);
+            }
+        </style>
+
+    {% elif user.userprofile.theme == 'Light theme' %}
+        <style>
+            .accordion-body:not(.all-recipes-cards){
+            background: rgba(255, 255, 255, 0.693);
+            }
+        </style>
+            
+    {% endif %}
+
+
+{% else %}
+    <style>
+        body,.navbar,.navrail,.primary-wrapper,.dynamic-recipes h1,.explore-tab,.tabcontent h5{
+            background: #F0ECE3;
+        }
+
+        .navbar,.navrail{
+            background: transparent;
+            -webkit-backdrop-filter: blur(40px);
+            backdrop-filter: blur(40px);
+        }
+    </style>
+
+    {% if request.path == landingpg %}
+    <style>
+        body,.navbar,.navrail,.primary-wrapper,.dynamic-recipes h1,.explore-tab,.tabcontent h5{
+            background: transparent;
+        }
+
+        .navbar,.navrail{
+            background: transparent;
+            -webkit-backdrop-filter: blur(40px);
+            backdrop-filter: blur(40px);
+        }
+    </style>
+    {% endif %}
+
+{% endif %}
+
+
+{% if user.is_authenticated %}
+
+    {% if request.path == landingpg %}
+
+    <style>
+        .navrail,.navbar,.logout-wrapper{
+            background: transparent;
+            -webkit-backdrop-filter: blur(40px);
+            backdrop-filter: blur(40px);
+        }
+    </style>
+    
+    {% endif %}
+
+{% endif %}
+
+
+{% block title %}
+<title>New Navbar Navrail</title>
+{% endblock %}
+
+<body id="body-color">
+{% if user.is_authenticated %}
+
+    <!-- navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg" id="navbar">
+        <div class="container-fluid">
+
+            <button class="btn btn-transparent navbar-offcanvas-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                <span class="material-symbols-rounded offcanvas-btn-icon">menu_open</span>
+            </button>
+
+            <div class="navrail-logo">
+                <img src="{% static 'testingapp/media/logo2.png' %}" class="nrweb-logo" alt="Yummy Recipes" srcset="">
+            </div>
+
+            <div class="navbar-brand-name"><a class="navbar-brand" href="{% url 'home' %}" id="navbar-brand-name">Yummy Recipes</a></div>
+            
+                {% block sm_weather %}
+                <div class="navbar-sm-weather">
+                    <div class="weather-widget">
+                        <div class="container">
+
+                            <div class="hstack gap-4">
+                                <div class="p-1">
+                                    {% if user.userlocation.location == '' %}
+
+                                    <div class="row" data-bs-toggle="modal" data-bs-target="#weatherModal" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Click to add location">
+                                        <div class="col-1" style="padding: 0">
+                                            <span class="material-symbols-rounded rightside-searchicon" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Click to add location" style="padding: 0;padding-left:5px;display: inline-block;vertical-align: middle;position: relative;bottom: 2px;font-size: 1.15em;">add_location</span> 
+                                        </div>
+    
+                                    </div>
+                                    
+                                    {% else %}
+        
+                                    <div class="row" data-bs-toggle="modal" data-bs-target="#weatherModal">
+                                        <div class="col-4" style="padding: 0">
+                                            <img id="navbarweatherIcon2">
+                                        </div>
+            
+                                        <div class="col-6 rightside-searchicon" style="padding: 0;padding-left:5px;display: flex;align-items: center;">
+                                            <span id="navbartemperature2"></span> &nbsp; <span>°C</span> 
+                                        </div>
+            
+                                        <!-- <div class="col-2 change-location" style="padding: 0;display: flex;align-items: center;">
+                                            <span class="material-symbols-rounded" style="font-size: 1em;">location_on</span>
+                                        </div> -->
+            
+                                    </div>
+        
+                                {% endif %}
+                                </div>
+
+                                <div class="p-1 sm-searchbar">
+                                    {% block sm_search-btn %}
+                                    <div class="rightside-searchbar">
+                                        <h5><a data-bs-toggle="modal" data-bs-target="#searchModal"><span class="material-symbols-rounded rightside-searchicon">search</span></a></h5>
+                                    </div>
+                                    {% endblock %}
+                                </div>
+
+                              </div>
+
+                           
+                        </div>
+
+                    
+                    </div>
+                    
+                </div>
+                {% endblock %}
+
+            
+            <!-- right side image, search icon, notification on navbar -->
+            <div class="dropdown btn-group dropstart navbar-right-list-items">
+                <ul class="nav justify-content-end">
+
+                    {% block weather_widget %}
+                    <li class="nav-item">
+                        <div class="rightside-searchbar">
+                            <div class="weather-widget">
+                                <div class="container">
+
+                                    <div class="row" data-bs-toggle="modal" data-bs-target="#weatherModal">
+                                        <div class="col-4" style="padding: 0">
+                                            <img id="navbarweatherIcon">
+                                        </div>
+
+                                        <div class="col-6" style="padding: 0;padding-left:5px;display: flex;align-items: center;">
+                                            <span id="navbartemperature"></span> &nbsp; <span>°C</span> 
+                                        </div>
+
+                                        <!-- <div class="col-2 change-location" style="padding: 0;display: flex;align-items: center;">
+                                            <span class="material-symbols-rounded" style="font-size: 1em;">location_on</span>
+                                        </div> -->
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {% endblock %}
+
+
+
+                    <li class="nav-item">
+                        {% block search-btn %}
+                        <div class="rightside-searchbar">
+                            <h5><a data-bs-toggle="modal" data-bs-target="#searchModal"><span class="material-symbols-rounded rightside-searchicon navicons">search</span></a></h5>
+                        </div>
+                        {% endblock %}
+                    </li>
+
+                    <!-- add dropdown menu for notifications -->
+                    <li class="nav-item">
+                        <div class="rightside-searchbar">
+                            <h5><span class="material-symbols-rounded rightside-searchicon navicons">notifications</span></h5>
+                        </div>
+                    </li>
+
+                    <!-- loggedin user image and dropdown -->
+                    <li class="nav-item">
+                        <div class="dropdown-center">
+                            <button class="nb-img-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ user.profile.profile_img.url }}" class="navbar-img-btn" style="width: 38px; height: 38px;" alt="Image">
+                            </button>
+
+                            <div class="dropdown-menu nb-rightimg-dropmenu" id="nb-rightimg-dropmenu" onclick="event.stopPropagation()">
+                                
+                                <div class="top-nb-dropmenu-content">
+                                    <p>{{request.user.email}}</p>
+                                    <div class="top-nb-dropmenu-img">
+                                        <img src="{{ user.profile.profile_img.url }}" alt="Avatar">
+                                    </div>
+                                    <h5>Hi, {{ request.user.first_name }}!</h5>
+                                    
+                                    {% if request.path == account_settings %}
+                                        <a href="{% url 'account_settings' %}" class="dropdown child-active"><span class="dropmenu-text">Account settings</span>
+                                        </a>
+                                    {% else %}
+                                        <a href="{% url 'account_settings' %}" class="dropdown"><span class="dropmenu-text">Account settings</span>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                                
+                                
+                                <div class="dropmenu-container">
+                                    
+                                    <div class="dropmenu-details-wrapper dropmenu-details1" id="dropmenu-details-wrapper2"> 
+                                
+                                        {% if request.path == profile %}
+                                            <a href="{% url 'profile' %}">
+                                                <p class="dropdown-second-child first_child child-active" id="dropmenu-child-active1"><span class="material-symbols-rounded nb-dropmenu-icons">person_filled</span> <span class="dropmenu-text">Profile</span></p>
+                                            </a>
+
+                                        {% elif request.path == updateprofile %}
+
+                                            <a href="{% url 'updateprofile' %}">
+                                                <p class="dropdown-second-child first_child child-active"><span class="material-symbols-rounded nb-dropmenu-icons">settings_account_box</span> <span class="dropmenu-text">Update profile</span></p>
+                                            </a>
+
+                                        {% elif request.path == updatepassword %}
+
+                                            <a href="{% url 'updatepassword' %}">
+                                                <p class="dropdown-second-child first_child child-active"><span class="material-symbols-rounded nb-dropmenu-icons">password</span> <span class="dropmenu-text">Update password</span></p>
+                                            </a>
+
+                                        {% else %}
+
+                                            <a href="{% url 'profile' %}">
+                                                <p class="dropdown-second-child first_child"><span class="material-symbols-rounded nb-dropmenu-icons">person_filled</span> <span class="dropmenu-text">Profile</span></p>
+                                            </a>
+
+                                        {% endif %}
+
+                                        {% if request.path == favourites %} 
+                                            <a href="{% url 'favourites' %}">
+                                                <p class="dropdown-second-child child-active"><span class="material-symbols-rounded nb-dropmenu-icons">star</span> <span class="dropmenu-text">Favourites</span></p>
+                                            </a>
+                                        {% else %}
+                                            <a href="{% url 'favourites' %}">
+                                                <p class="dropdown-second-child"><span class="material-symbols-rounded nb-dropmenu-icons">star</span> <span class="dropmenu-text">Favourites</span></p>
+                                            </a>
+                                        {% endif %}
+
+                                        {% if request.path == blog_history %}
+                                            <a href="{% url 'blog_history' %}">
+                                                <p class="dropdown-second-child child-active"><span class="material-symbols-rounded nb-dropmenu-icons">history</span> <span class="dropmenu-text">History</span></p>
+                                            </a>
+                                        {% else %}
+                                            <a href="{% url 'blog_history' %}">
+                                                <p class="dropdown-second-child"><span class="material-symbols-rounded nb-dropmenu-icons">history</span> <span class="dropmenu-text">History</span></p>
+                                            </a>
+                                        {% endif %}
+
+                                        <!-- <div class="dropdown dropstart dropmenu-links" id="appearance-dropdown"> -->
+
+                                        {% if request.path == appearance %}
+                                            <a href="{% url 'appearance' %}">
+                                                <p class="dropdown-second-child2 child-active" id="dropmenu-child-active2"><span class="material-symbols-rounded nb-dropmenu-icons">palette</span> <span class="dropmenu-text">Appearance</span></p>
+                                            </a>
+                                        {% else %}
+                                            <a href="{% url 'appearance' %}">
+                                                <p class="dropdown-second-child2 last-child"><span class="material-symbols-rounded nb-dropmenu-icons">palette</span> <span class="dropmenu-text">Appearance</span></p>
+                                            </a>
+                                        {% endif %}
+                                        </div>
+                                    </div>
+
+                            
+                                    <div class="dropmenu-details-wrapper dropmenu-details-links" id="dropmenudetailslinks">                                        
+
+                                        <p>Last Login : {{user.last_login.date}}</p>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+          </div>
+        </div>
+    </nav>
+
+    <!-- offcanvas -->
+    <div class="offcanvas offcanvas-start nav-offcanvas main-offcanvas" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+
+            <div class="offcanvas-title" id="offcanvasExampleLabel">
+                <div class="offcanvas-header">
+
+                    <!-- inside offcanvas close btn -->
+                    <button type="button" class="offcanvas-close-btn" id="offcanvas-close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                        <span class="material-symbols-rounded close-btn-icon" id="offcanvasclosebtnicon">menu_open</span>
+                    </button>
+
+                    <h5 id="offcanvasbrandname">Yummy Recipes</h5>
+
+                </div>
+
+            </div>
+          
+        </div>
+
+        <div class="offcanvas-body nav-offcanvas-body" id="navoffcanvasbody">
+            
+            <div class="offcanvas-body-container">
+
+                <div class="offcanvas-body-list body-links-first">
+                    <ul class="offcanvas-body-links">
+                        <li>
+                            <a class="main-links {% if request.path == home %} active {% endif %}" id="offcanvaslisttext1" href="{% url 'home' %}"><span class="material-symbols-rounded offcanvas-link-icons" id="offcanvaslinkicons1">home</span> Home</a>
+                        </li>
+
+                        {% if viewpost %}
+                            <li>
+                                <a class="main-links active" href="{% url 'explore' %}"><span class="material-symbols-rounded offcanvas-link-icons">dinner_dining</span> {{post.title}}</a>
+                            </li> 
+
+                        {% elif updaterecipe %}
+                        
+                            <li>
+                                <a class="main-links active" href="{% url 'explore' %}"><span class="material-symbols-rounded offcanvas-link-icons">edit_note</span> {{recipes.title}}</a>
+                            </li>
+                        
+                        {% endif %}
+
+                        <li>
+                            <a class="main-links {% if request.path == createpost %} active {% endif %}" href="{% url 'createpost' %}" id="offcanvaslisttext2">
+                                <span class="material-symbols-rounded offcanvas-link-icons" id="offcanvaslinkicons2">list_alt</span>
+                                Recipe
+                            </a>
+                        </li>
+
+                        <li>
+                            {% if request.path == dashboard %}
+                                <a class="main-links active" href="{% url 'dashboard' %}">
+                                    <span class="material-symbols-rounded offcanvas-link-icons">dashboard</span>
+                                    Dashboard
+                                </a>
+                            {% else %}
+                                <a class="main-links" href="{% url 'dashboard' %}" id="offcanvaslisttext3">
+                                    <span class="material-symbols-rounded offcanvas-link-icons"  id="offcanvaslinkicons3">dashboard</span>
+                                    Dashboard
+                                </a>
+                            {% endif %}
+                        </li>
+                                        
+                        <!-- <li>
+                            <a class="main-links {% if request.path == search %} active {% endif %}" href="" id="offcanvaslisttext4">
+                                <span class="material-symbols-rounded offcanvas-link-icons" id="offcanvaslinkicons4">search</span>
+                                Search
+                            </a>
+                        </li> -->
+                        
+                        <li>
+                            <a class="main-links {% if request.path == explore %} active {% endif %}" href="{% url 'explore' %}" id="offcanvaslisttext5">
+                                <span class="material-symbols-rounded offcanvas-link-icons" id="offcanvaslinkicons5">explore</span> 
+                                Explore
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="main-links {% if request.path == trending %} active {% endif %}" href="{% url 'trending' %}" id="offcanvaslisttext6">
+                                <span class="material-symbols-rounded offcanvas-link-icons" id="offcanvaslinkicons6">trending_up</span> 
+                                Trending
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a class="main-links {% if request.path == timeline %} active {% endif %}" href="{% url 'timeline' %}" id="offcanvaslisttext7">
+                                <span class="material-symbols-rounded offcanvas-link-icons" id="offcanvaslinkicons7">timeline</span> 
+                                Timeline
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="main-links {% if request.path == blog_history %} active {% endif %}" href="{% url 'blog_history' %}" id="offcanvaslisttext8">
+                                <span class="material-symbols-rounded offcanvas-link-icons" id="offcanvaslinkicons8">history</span> 
+                                History
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="main-links {% if request.path == favourites %} active {% endif %}" href="{% url 'favourites' %}" id="offcanvaslisttext9">
+                                <span class="material-symbols-rounded offcanvas-link-icons" id="offcanvaslinkicons9">star</span> 
+                                Favourites
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <hr id="line-sep1">
+
+                <div class="offcanvas-body-list body-links-second">
+                    
+                    <h5 id="bodylinkssecond">Settings</h5>
+                    
+                    <ul class="offcanvas-body-links">
+                        
+                        <li>
+                            {% if request.path == profile %}
+                            <a class="main-links active" href="{% url 'profile' %}"><span class="material-symbols-rounded offcanvas-link-icons">person_filled</span> Profile</a>
+                        
+                            {% elif request.path == updateprofile %}
+                       
+                            <a class="main-links active" href="{% url 'updateprofile' %}"><span class="material-symbols-rounded offcanvas-link-icons">settings_account_box</span> Update profile</a>
+                            {% elif request.path == updatepassword %}
+                        
+                            <a class="main-links active" href="{% url 'updatepassword' %}"><span class="material-symbols-rounded offcanvas-link-icons">password</span> Update password</a>
+                            {% else %}
+
+                            <a class="main-links" href="{% url 'profile' %}" id="offcanvaslisttext10"><span class="material-symbols-rounded offcanvas-link-icons" id="offcanvaslinkicons10">person_filled</span> Profile</a>
+                            {% endif %}
+                        </li>
+                        
+                    </ul>
+                </div>
+
+                <hr id="line-sep2">
+
+                <div class="offcanvas-body-list body-links-third">
+                    
+                    <h5 id="bodylinksthird">Themes</h5>
+
+                    <ul class="offcanvas-body-links">
+                        <li>
+                            {% if request.path == appearance %}
+                            <a href="{% url 'appearance' %}" class="main-links active" id="offcanvaslisttext11"><span class="material-symbols-rounded offcanvas-link-icons"  id="offcanvaslinkicons11">palette</span> Appearance</a>
+                            {% else %}
+                            <a href="{% url 'appearance' %}" class="main-links" id="offcanvaslisttext12"><span class="material-symbols-rounded offcanvas-link-icons">palette</span> Appearance</a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="logout-container" id="logoutcontainer">
+                <span>
+                    <ul>                         
+                        <li><img src="{{ user.profile.profile_img.url }}" class="navbar-userprofile" style="width: 38px; height: 38px; border-radius:100%" alt="Image"></li>
+                        <!-- <li> <h4>{{ request.user.first_name }} {{ request.user.last_name }}</h4> </li> -->
+                    </ul>
+                </span>
+
+                <span>
+                    <button class="logout-btn" id="logoutbtn" data-bs-toggle="modal" data-bs-target="#logoutModal"><span class="material-symbols-rounded logout-icon">power_rounded</span></button>
+                </span>
+            </div>
+        </div>
+
+
+        
+    </div>
+
+    <!-- navigationrail links -->                         
+    <div class="w3-sidebar w3-bar-block w3-collapse navrail" id="navrail">
+        <!-- <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()"><span class="material-symbols-rounded close-btn">menu_open</span></button> -->
+        
+        <div class="nrlink-container">
+               
+            <div class="navrail-content">
+    
+                <a class="dropdown-ite w3-bar-item w3-button navrail-links" href="{% url 'home' %}">
+                    <ul class="navrail-listitems">
+                        {% if request.path == home %} 
+                            <li><span class="material-symbols-rounded navrail-icons navrail-icons-active" id="navrailiconactive1">home</span></li>
+                            <li><span class="navrail-text navrail-text-active" id="navrail-text-active">Home</span></li>
+                        {% else %}
+                            <li><span class="material-symbols-rounded navrail-icons" id="navrailicon1">home</span></li>
+                            <li><span class="navrail-text" id="navrailtext1">Home</span></li>
+                        {% endif %}
+                    </ul>
+                </a>
+    
+                {% if viewpost %} 
+                <a class="dropdown-ite w3-bar-item w3-button navrail-links" href="{% url 'viewpost' post.pk %}">
+                    <ul class="navrail-listitems" data-bs-custom-class="custom-popover" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="{{post.title}}">
+                        <li><span class="material-symbols-rounded navrail-icons navrail-icons-active" id="navrailiconactive3">dinner_dining</span></li>
+                        <li><span class="navrail-text navrail-text-active" id="navrail-text-active">Recipe</span></li>
+                    </ul>
+                </a>
+                {% elif updaterecipe %}
+                <a class="dropdown-ite w3-bar-item w3-button navrail-links">
+                    <ul class="navrail-listitems">
+                        <li><span class="material-symbols-rounded navrail-icons navrail-icons-active" id="navrailiconactive4">edit_note</span></li>
+                        <li><span class="navrail-text navrail-text-active" id="navrail-text-active">Edit</span></li>
+                    </ul>
+                </a>
+                {% endif %}
+
+                <a class="dropdown-ite w3-bar-item w3-button navrail-links" href="{% url 'createpost' %}">
+                    <ul class="navrail-listitems">
+                        {% if request.path == createpost %}
+                            <li><span class="material-symbols-rounded navrail-icons navrail-icons-active" id="navrailiconactive4">list_alt</span></li>
+                            <li><span class="navrail-text navrail-text-active" id="navrail-text-active">New recipe</span></li>
+                        {% else %}
+                            <li><span class="material-symbols-rounded navrail-icons" id="navrailicon2">list_alt</span></li>
+                            <li><span class="navrail-text" id="navrailtext2">New recipe</span></li>
+                        {% endif %}
+                    </ul>
+                </a>
+
+                <a class="dropdown-ite w3-bar-item w3-button navrail-links" href="{% url 'dashboard' %}">
+                    <ul class="navrail-listitems">
+                        {% if request.path == dashboard %}
+                            <li><span class="material-symbols-rounded navrail-icons navrail-icons-active" id="navrailiconactive5">dashboard</span></li>
+                            <li><span class="navrail-text navrail-text-active" id="navrail-text-active">Dashboard</span></li>
+                        {% else %}
+                            <li><span class="material-symbols-rounded navrail-icons" id="navrailicon3">dashboard</span></li>
+                            <li><span class="navrail-text" id="navrailtext3">Dashboard</span></li>
+                        {% endif %}
+                    </ul>
+                </a>
+    
+                <a class="dropdown-ite w3-bar-item w3-button navrail-links" href="{% url 'explore' %}">
+                    <ul class="navrail-listitems">
+                        {% if request.path == explore %} 
+                            <li><span class="material-symbols-rounded navrail-icons navrail-icons-active" id="navrailiconactive7">explore</span></li>
+                            <li><span class="navrail-text navrail-text-active" id="navrail-text-active">Explore</span></li>
+                        {% else %} 
+                            <li><span class="material-symbols-rounded navrail-icons" id="navrailicon5">explore</span></li>
+                            <li><span class="navrail-text" id="navrailtext5">Explore</span></li>
+                        {% endif %}
+                    </ul>
+                </a>
+    
+                <a class="dropdown-ite w3-bar-item w3-button navrail-links" href="{% url 'trending' %}">
+                    <ul class="navrail-listitems">
+                        {% if request.path == trending %}
+                            <li><span class="material-symbols-rounded navrail-icons navrail-icons-active" id="navrailiconactive8">trending_up</span></li>
+                            <li><span class="navrail-text navrail-text-active" id="navrail-text-active">Trending</span></li>
+                        {% else %}
+                            <li><span class="material-symbols-rounded navrail-icons" id="navrailicon6">trending_up</span></li>
+                            <li><span class="navrail-text" id="navrailtext6">Trending</span></li>
+                        {% endif %}
+                    </ul>
+                </a>
+    
+                <a class="dropdown-ite w3-bar-item w3-button navrail-links" href="{% url 'timeline' %}"> 
+                    <ul class="navrail-listitems">
+                        {% if request.path == timeline %}
+                            <li><span class="material-symbols-rounded navrail-icons navrail-icons-active" id="navrailiconactive9">timeline</span></li>
+                            <li><span class="navrail-text navrail-text-active" id="navrail-text-active">Timeline</span></li>
+                        {% else %}
+                            <li><span class="material-symbols-rounded navrail-icons" id="navrailicon7">timeline</span></li>
+                            <li><span class="navrail-text" id="navrailtext7">Timeline</span></li>
+                        {% endif %}
+                    </ul>
+                </a>
+                
+    
+            </div>
+
+            <div class="logout-wrapper" id="logoutwrapper">
+                <div class="logout-link" id="logoutlink" data-bs-toggle="modal" data-bs-target="#logoutModal" id="logoutlink">
+                    <span class="material-symbols-rounded logouticon" id="logouticon">power_rounded</span>
+                </div>
+            </div>
+
+        </div>
+
+        
+
+    </div>
+
+    
+
+{% else %}    
+
+    <!-- navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg">
+        <div class="container-fluid">
+
+            <button class="btn btn-transparent navbar-offcanvas-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                <span class="material-symbols-rounded offcanvas-btn-icon">menu_open</span>
+            </button>
+
+            <div class="navrail-logo">
+                <img src="{% static 'testingapp/media/logo2.png' %}" class="nrweb-logo" alt="Yummy Recipes" srcset="">
+            </div>
+
+            <div class="navbar-brand-name"><a class="navbar-brand" href="{% url 'landingpg' %}">Yummy Recipes</a></div>
+            
+            <div class="navbar-sm-weather">
+                <div class="weather-widget">
+                    <div class="container">
+
+                        <div class="hstack gap-4">
+
+                            <div class="p-1 sm-searchbar">
+                                {% block sm_search-btn2 %}
+                                <div class="rightside-searchbar">
+                                    <h5><a data-bs-toggle="modal" data-bs-target="#searchModal"><span class="material-symbols-rounded rightside-searchicon">search</span></a></h5>
+                                </div>
+                                {% endblock %}
+                            </div>
+
+                        </div>
+
+                    </div>
+                
+                </div>
+                
+            </div>
+
+            <div class="dropdown btn-group dropstart navbar-right-list-items">
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        {% block search-btn2 %}
+                        <div class="rightside-searchbar">
+                            <h5><a data-bs-toggle="modal" data-bs-target="#searchModal"><span class="material-symbols-rounded rightside-searchicon">search</span></a></h5>
+                        </div>
+                        {% endblock %}
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+    </nav>
+
+    <!-- offcanvas -->
+    <div class="offcanvas offcanvas-start nav-offcanvas" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+
+            <div class="offcanvas-title" id="offcanvasExampleLabel">
+                <div class="offcanvas-header">
+
+                    <!-- inside offcanvas close btn -->
+                    <button type="button" class="offcanvas-close-btn" data-bs-dismiss="offcanvas" aria-label="Close">
+                        <span class="material-symbols-rounded close-btn-icon">menu_open</span>
+                    </button>
+
+                    <h5>Yummy Recipes</h5>
+
+                </div>
+
+            </div>
+          
+        </div>
+
+        <div class="offcanvas-body nav-offcanvas-body">
+            
+            <div class="offcanvas-body-container">
+
+                <div class="offcanvas-body-list body-links-first">
+                    <ul class="offcanvas-body-links">
+                        <li>
+                            <a class="main-links {% if request.path == landingpg %} active {% endif %}" href="{% url 'landingpg' %}">
+                                <span class="material-symbols-rounded offcanvas-link-icons">web</span> 
+                                Home
+                            </a>
+                        </li>
+
+                        {% if request.path == login %}
+                            <li>
+                                <a class="main-links active" href="{% url 'login' %}">
+                                    <span class="material-symbols-rounded offcanvas-link-icons">login</span> 
+                                    Login
+                                </a>
+                            </li>
+
+                        {% elif request.path == topostlogin %}
+                            <li>
+                                <a class="main-links active" href="">
+                                    <span class="material-symbols-rounded offcanvas-link-icons">login</span> 
+                                    Login
+                                </a>
+                            </li>
+                        {% else %}
+
+                            <li>
+                                <a class="main-links" href="{% url 'login' %}">
+                                    <span class="material-symbols-rounded offcanvas-link-icons">login</span> 
+                                    Login
+                                </a>
+                            </li>
+
+                        {% endif %}
+
+                        <li>
+                            <a class="main-links {% if request.path == signup %} active {% endif %}" href="{% url 'signup' %}">
+                                <span class="material-symbols-rounded offcanvas-link-icons">account_circle</span> 
+                                Signup
+                            </a>
+                        </li>
+
+
+                        {% if request.path == landingpg %}
+                        
+                        {% else %}
+                        <li>
+                            <a class="main-links {% if request.path == explore %} active {% endif %}" href="{% url 'explore' %}">
+                                <span class="material-symbols-rounded offcanvas-link-icons">explore</span> 
+                                Explore
+                            </a>
+                        </li>
+
+                        {% endif %}
+
+                        <li>
+                            <a class="main-links {% if request.path == trending %} active {% endif %}" href="{% url 'trending' %}">
+                                <span class="material-symbols-rounded offcanvas-link-icons">trending_up</span> 
+                                Trending
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- navigation links -->
+    <div class="w3-sidebar w3-bar-block w3-collapse navrail" id="mySidebar">
+        <!-- <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()"><span class="material-symbols-rounded close-btn">menu_open</span></button> -->
+        
+        <div class="nrlink-container">
+               
+            <div class="navrail-content">
+    
+                <a class="dropdown-ite w3-bar-item w3-button navrail-links" href="{% url 'landingpg' %}">
+                    <ul class="navrail-listitems">
+                        {% if request.path == landingpg %}
+                            <li><span class="material-symbols-rounded navrail-icons navrail-icons-active" id="navrailicon1">web</span></li>
+                            <li><span class="navrail-text navrail-text-active">Home</span></li>
+                        {% else %}
+                            <li><span class="material-symbols-rounded navrail-icons" id="navrailicon1">web</span></li>
+                            <li><span class="navrail-text">Home</span></li>
+                        {% endif %}
+                    </ul>
+                </a>
+        
+                {% if request.path == login %} 
+                    <a class="dropdown-ite w3-bar-item w3-button navrail-links" href="{% url 'login' %}">
+                        <ul class="navrail-listitems"> 
+                            <li><span class="material-symbols-rounded navrail-icons navrail-icons-active">login</span></li>
+                            <li><span class="navrail-text navrail-text-active">Login</span></li>
+                        </ul>
+                    </a>
+
+                {% elif request.path == topostlogin %} 
+                    <a class="dropdown-ite w3-bar-item w3-button navrail-links" href="">
+                        <ul class="navrail-listitems"> 
+                            <li><span class="material-symbols-rounded navrail-icons navrail-icons-active">login</span></li>
+                            <li><span class="navrail-text navrail-text-active">Login</span></li>
+                        </ul>
+                    </a>
+                    
+                {% else %}
+                    <a class="dropdown-ite w3-bar-item w3-button navrail-links" href="{% url 'login' %}">
+                        <ul class="navrail-listitems"> 
+                            <li><span class="material-symbols-rounded navrail-icons" id="navrailicon1">login</span></li>
+                            <li><span class="navrail-text">Login</span></li>
+                        </ul>
+                    </a>
+                {% endif %}
+
+
+                <a class="dropdown-ite w3-bar-item w3-button navrail-links" href="{% url 'signup' %}">
+                    <ul class="navrail-listitems">
+                        {% if request.path == signup %}
+                            <li><span class="material-symbols-rounded navrail-icons navrail-icons-active">account_circle</span></li>
+                            <li><span class="navrail-text navrail-text-active">Signup</span></li>
+                        {% else %}
+                            <li><span class="material-symbols-rounded navrail-icons" id="navrailicon1">account_circle</span></li>
+                            <li><span class="navrail-text">Signup</span></li>
+                        {% endif %}
+                    </ul>
+                </a>
+        
+                {% if request.path == landingpg %}
+
+                {% else %}
+                    <a class="dropdown-ite w3-bar-item w3-button navrail-links" href="{% url 'explore' %}">
+                        <ul class="navrail-listitems">
+                            {% if request.path == explore %} 
+                                <li><span class="material-symbols-rounded navrail-icons navrail-icons-active">explore</span></li>
+                                <li><span class="navrail-text navrail-text-active">Explore</span></li>
+                            {% else %} 
+                                <li><span class="material-symbols-rounded navrail-icons" id="navrailicon1">explore</span></li>
+                                <li><span class="navrail-text">Explore</span></li>
+                            {% endif %}
+                        </ul>
+                    </a>
+                {% endif %}
+                
+
+                <a class="dropdown-ite w3-bar-item w3-button navrail-links" href="{% url 'trending' %}">
+                    <ul class="navrail-listitems">
+                        {% if request.path == trending %}
+                            <li><span class="material-symbols-rounded navrail-icons navrail-icons-active">trending_up</span></li>
+                            <li><span class="navrail-text navrail-text-active">Trending</span></li>
+                        {% else %}
+                            <li><span class="material-symbols-rounded navrail-icons" id="navrailicon1">trending_up</span></li>
+                            <li><span class="navrail-text">Trending</span></li>
+                        {% endif %}
+                    </ul>
+                </a>
+                
+            </div>
+
+        </div>
+
+    </div>
+
+
+{% endif %}
+
+
+{% block content %}
+
+
+
+{% endblock %}
+
+    
+
+</body>
+
+<script>
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+</script>
+
+<!-- primary background color -->
+<script>
+    $(document).ready(function() {
+        $('#color-form').on('submit', function(e) {
+            e.preventDefault(); // prevent the form from submitting normally
+            $.ajax({
+                type: 'POST',
+                url: '{% url "appearance" %}', // replace with your view URL
+                data: $(this).serialize(),
+                success: function(response) {
+                // update body background color
+                var primaryColor = $('#primary_color').val();
+                // $('#body-color').css('background-color', primaryColor);
+                // $('#navbar').css('background-color', primaryColor);
+                // $('#navrail').css('background-color', primaryColor);
+                $('#color-preview-form1').css('background-color', primaryColor);
+                $('#offcanvasExample').css('background-color', primaryColor);
+                $('#logoutcontainer').css('background-color', primaryColor);
+
+                $('#nb-rightimg-dropmenu').css('background-color', primaryColor);
+                // $('#logoutwrapper').css('background-color', primaryColor);
+                $('#logoutlink').css('background-color', primaryColor);
+                $('#dropmenudetailslinks').css('background-color', primaryColor);
+                $('#footerwaveline').css('background-color', primaryColor);
+
+                
+                
+
+                $('#primary_color_btn').css('background-color', primaryColor);
+                $('#secondary_color_btn').css('background-color', primaryColor);
+                $('#tertiary_color_btn').css('background-color', primaryColor);
+                $('#activelink_color_btn').css('background-color', primaryColor);
+                $('#hover_color_btn').css('background-color', primaryColor);
+
+                $('#reset-colors').css('background-color', primaryColor);
+                $('#reset-colors2').css('background-color', primaryColor);
+                $('#externalButton').css('background-color', primaryColor);
+
+
+                $('#dcp_submit-btn1').css('background-color', primaryColor);
+                $('#dcp_submit-btn2').css('background-color', primaryColor);
+                $('#dcp_submit-btn3').css('background-color', primaryColor);
+                $('#dcp_submit-btn4').css('background-color', primaryColor);
+
+
+                // add more #my-body selectors here as needed
+            },
+                error: function(xhr, status, error) {
+                    // handle error response, if any
+                }
+            });
+        });
+    });
+</script>
+
+<!-- secondary background color -->
+<script>
+    $(document).ready(function() {
+        $('#color-form2').on('submit', function(e) {
+            e.preventDefault(); // prevent the form from submitting normally
+            $.ajax({
+                type: 'POST',
+                url: '{% url "appearance" %}', // replace with your view URL
+                data: $(this).serialize(),
+                success: function(response) {
+                    // update body background color
+                    $('#body-color').css('background-color', $('#secondary_color').val());
+                    $('#navbar').css('background-color', $('#secondary_color').val());
+                    $('#navrail').css('background-color', $('#secondary_color').val());
+                    $('#navoffcanvasbody').css('background-color', $('#secondary_color').val());
+
+
+                    $('#logoutwrapper').css('background-color', $('#secondary_color').val());
+
+
+                    $('#primary-wrapper').css('background-color', $('#secondary_color').val());
+                    $('#dyn-recipes-h1').css('background-color', $('#secondary_color').val());
+                    $('#color-preview-form2').css('background-color', $('#secondary_color').val());
+                    $('#sidebar-header').css('background-color', $('#secondary_color').val());
+                    $('#sidebar-header').css('background-color', $('#secondary_color').val());
+                    $('#history-card').css('background-color', $('#secondary_color').val());
+                    $('#nb-dropmenu-content').css('background-color', $('#secondary_color').val());
+                    $('#dropmenu-details-wrapper1').css('background-color', $('#secondary_color').val());
+                    $('#dropmenu-details-wrapper2').css('background-color', $('#secondary_color').val());
+                    // $('#logoutlink').css('background-color', $('#secondary_color').val());
+
+                    
+                },
+                error: function(xhr, status, error) {
+                    // handle error response, if any
+                }
+            });
+        });
+    });
+</script>
+
+<!-- tertiary color (text color) -->
+<script>
+    $(document).ready(function() {
+        $('#color-form3').on('submit', function(e) {
+            e.preventDefault(); // prevent the form from submitting normally
+            $.ajax({
+                type: 'POST',
+                url: '{% url "appearance" %}', // replace with your view URL
+                data: $(this).serialize(),
+                success: function(response) {
+                    // update body background color
+                    $('#color-preview-form3').css('background-color', $('#tertiary_color').val());
+                    $('#offcanvasclosebtnicon').css('background-color', $('#tertiary_color').val());
+                    $('.navicons').css('color', $('#tertiary_color').val());
+                    $('#footer').css('color', $('#tertiary_color').val());
+                    $('.footerlinks').css('color', $('#tertiary_color').val());
+
+                    
+
+                    $('#dyn-recipes-h1').css('color', $('#tertiary_color').val());
+                    $('#sidebar-heading-h1').css('color', $('#tertiary_color').val());
+                    $('#navbar-brand-name').css('color', $('#tertiary_color').val());
+                    $('#navrail-text-active').css('color', $('#tertiary_color').val());
+
+                    $('#offcanvaslisttext1').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslisttext2').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslisttext3').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslisttext4').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslisttext5').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslisttext6').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslisttext7').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslisttext8').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslisttext9').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslisttext10').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslisttext11').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslisttext12').css('color', $('#tertiary_color').val());
+
+                    $('#offcanvaslinkicons1').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslinkicons2').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslinkicons3').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslinkicons4').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslinkicons5').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslinkicons6').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslinkicons7').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslinkicons8').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslinkicons9').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslinkicons10').css('color', $('#tertiary_color').val());
+                    $('#offcanvaslinkicons11').css('color', $('#tertiary_color').val());
+
+
+                    $('#bodylinkssecond').css('color', $('#tertiary_color').val());
+                    $('#bodylinksthird').css('color', $('#tertiary_color').val());
+
+                    $('#line-sep1').css('color', $('#tertiary_color').val());
+                    $('#line-sep2').css('color', $('#tertiary_color').val());
+                    
+                    $('#logouticon').css('color', $('#tertiary_color').val());
+                    $('#dropmenudetailslinks').css('color', $('#tertiary_color').val());
+                    
+
+                    $('#primary_color_btn').css('color', $('#tertiary_color').val());
+                    $('#secondary_color_btn').css('color', $('#tertiary_color').val());
+                    $('#tertiary_color_btn').css('color', $('#tertiary_color').val());
+                    $('#activelink_color_btn').css('color', $('#tertiary_color').val());
+                    $('#hover_color_btn').css('color', $('#tertiary_color').val());
+                    $('#nb-dropmenu-content').css('color', $('#tertiary_color').val());
+                    $('#dropmenu-details-wrapper1').css('color', $('#tertiary_color').val());
+                    $('#dropmenu-details-wrapper2').css('color', $('#tertiary_color').val());
+                    $('#back-btn-icon').css('color', $('#tertiary_color').val());
+                    $('#subheading').css('color', $('#tertiary_color').val());
+                    $('.themetext').css('color', $('#tertiary_color').val());
+                    
+
+                    
+                    $('#reset-colors').css('color', $('#tertiary_color').val());
+                    $('#reset-colors2').css('color', $('#tertiary_color').val());
+                    $('#externalButton').css('color', $('#tertiary_color').val());
+
+
+
+                    $('#activelink_color_heading').css('color', $('#tertiary_color').val());
+                    $('#sidebar-subheading').css('color', $('#tertiary_color').val());
+
+
+                    $('#navrailicon1').css('color', $('#tertiary_color').val());
+                    $('#navrailicon2').css('color', $('#tertiary_color').val());
+                    $('#navrailicon3').css('color', $('#tertiary_color').val());
+                    $('#navrailicon4').css('color', $('#tertiary_color').val());
+                    $('#navrailicon5').css('color', $('#tertiary_color').val());
+                    $('#navrailicon6').css('color', $('#tertiary_color').val());
+                    $('#navrailicon7').css('color', $('#tertiary_color').val());
+                    $('#navrailicon8').css('color', $('#tertiary_color').val());
+                    $('#navrailicon9').css('color', $('#tertiary_color').val());
+                    $('#navrailicon10').css('color', $('#tertiary_color').val());
+                    $('#navrailicon11').css('color', $('#tertiary_color').val());
+                    $('#navrailicon12').css('color', $('#tertiary_color').val());
+                    $('#navrailicon13').css('color', $('#tertiary_color').val());
+                    $('#navrailicon14').css('color', $('#tertiary_color').val());
+
+
+
+                    $('#navrailtext1').css('color', $('#tertiary_color').val());
+                    $('#navrailtext2').css('color', $('#tertiary_color').val());
+                    $('#navrailtext3').css('color', $('#tertiary_color').val());
+                    $('#navrailtext4').css('color', $('#tertiary_color').val());
+                    $('#navrailtext5').css('color', $('#tertiary_color').val());
+                    $('#navrailtext6').css('color', $('#tertiary_color').val());
+                    $('#navrailtext7').css('color', $('#tertiary_color').val());
+                    $('#navrailtext8').css('color', $('#tertiary_color').val());
+                    $('#navrailtext9').css('color', $('#tertiary_color').val());
+                    $('#navrailtext10').css('color', $('#tertiary_color').val());
+                    $('#navrailtext11').css('color', $('#tertiary_color').val());
+                    $('#navrailtext12').css('color', $('#tertiary_color').val());
+                    $('#navrailtext13').css('color', $('#tertiary_color').val());
+                    $('#navrailtext14').css('color', $('#tertiary_color').val());
+
+
+                },
+                error: function(xhr, status, error) {
+                    // handle error response, if any
+                }
+            });
+        });
+    });
+</script>
+
+<!-- active link color -->
+<script>
+    $(document).ready(function() {
+        $('#color-form4').on('submit', function(e) {
+            e.preventDefault(); // prevent the form from submitting normally
+            $.ajax({
+                type: 'POST',
+                url: '{% url "appearance" %}', // replace with your view URL
+                data: $(this).serialize(),
+                success: function(response) {
+                    // update body background color
+                    $('#color-preview-form4').css('background-color', $('#active_link_color').val());
+                    $('#dropmenu-child-active1').css('background-color', $('#active_link_color').val());
+                    $('#dropmenu-child-active2').css('background-color', $('#active_link_color').val());
+                    $('#listactive').css('background-color', $('#active_link_color').val());
+                    $('#offcanvaslisttext11').css('background-color', $('#active_link_color').val());
+
+                    
+
+
+
+
+                    $('#navrailiconactive1').css('background-color', $('#active_link_color').val());
+                    $('#navrailiconactive2').css('background-color', $('#active_link_color').val());
+                    $('#navrailiconactive3').css('background-color', $('#active_link_color').val());
+                    $('#navrailiconactive4').css('background-color', $('#active_link_color').val());
+                    $('#navrailiconactive5').css('background-color', $('#active_link_color').val());
+                    $('#navrailiconactive6').css('background-color', $('#active_link_color').val());
+                    $('#navrailiconactive7').css('background-color', $('#active_link_color').val());
+                    $('#navrailiconactive8').css('background-color', $('#active_link_color').val());
+                    $('#navrailiconactive9').css('background-color', $('#active_link_color').val());
+                    $('#navrailiconactive10').css('background-color', $('#active_link_color').val());
+                    $('#navrailiconactive11').css('background-color', $('#active_link_color').val());
+                    $('#navrailiconactive12').css('background-color', $('#active_link_color').val());
+                    $('#navrailiconactive13').css('background-color', $('#active_link_color').val());
+                    $('#navrailiconactive14').css('background-color', $('#active_link_color').val());
+                    $('#navrailiconactive15').css('background-color', $('#active_link_color').val());
+                    $('#navrailiconactive16').css('background-color', $('#active_link_color').val());
+                    $('#navrailiconactive17').css('background-color', $('#active_link_color').val());
+                    $('#navrailiconactive18').css('background-color', $('#active_link_color').val());
+
+
+                },
+                error: function(xhr, status, error) {
+                    // handle error response, if any
+                }
+            });
+        });
+    });
+</script>
+
+<!-- hover color -->
+<script>
+    $(document).ready(function() {
+        $('#color-form5').on('submit', function(e) {
+            e.preventDefault(); // prevent the form from submitting normally
+            $.ajax({
+                type: 'POST',
+                url: '{% url "appearance" %}', // replace with your view URL
+                data: $(this).serialize(),
+                success: function(response) {
+                    
+                    // update body background color
+                    $('#color-preview-form5').css('background-color', $('#hover_color').val());
+                    $('#navrail-links-hover').css('background-color', $('#hover_color').val());
+
+                },
+                error: function(xhr, status, error) {
+                    // handle error response, if any
+                }
+            });
+        });
+    });
+
+    $(document).ready(function() {
+
+});
+</script>
+
+
+
+<!-- Default color palettes color's -->
+<script>
+    // form 1
+    // Primary color 
+    $(document).ready(function() {
+        $('#colorpaletteform1').on('submit', function(e) {
+            e.preventDefault(); // prevent the form from submitting normally
+            $.ajax({
+                type: 'POST',
+                url: '{% url "dcp_1" %}', // replace with your view URL
+                data: $(this).serialize(),
+                success: function(response) {
+                // update body background color
+                var dcpprimaryColor = $('#dcp_primary_color').val();
+                var dcpsecondaryColor = $('#dcp_secondary_color').val();
+                var dcptertiary_color = $('#dcp_tertiary_color').val();
+                var dcpactivelink_color = $('#dcp_activelink_color').val();
+                var dcphover_color = $('#dcp_hover_color').val();
+
+
+                // Primary color
+                // $('#body-color').css('background-color', dcpprimaryColor);
+                // $('#navbar').css('background-color', dcpprimaryColor);
+                // $('#navrail').css('background-color', dcpprimaryColor);
+                $('#color-preview-form1').css('background-color', dcpprimaryColor);
+                $('#nb-rightimg-dropmenu').css('background-color', dcpprimaryColor);
+                $('#offcanvasExample').css('background-color', dcpprimaryColor);
+                $('#logoutcontainer').css('background-color', dcpprimaryColor);
+                
+
+                // $('#logoutwrapper').css('background-color', dcpprimaryColor);
+                $('#logoutlink').css('background-color', dcpprimaryColor);
+                $('#dropmenudetailslinks').css('background-color', dcpprimaryColor);
+                $('#footerwaveline').css('background-color', dcpprimaryColor);
+
+
+                $('#primary_color_btn').css('background-color', dcpprimaryColor);
+                $('#secondary_color_btn').css('background-color', dcpprimaryColor);
+                $('#tertiary_color_btn').css('background-color', dcpprimaryColor);
+                $('#activelink_color_btn').css('background-color', dcpprimaryColor);
+                $('#hover_color_btn').css('background-color', dcpprimaryColor);
+
+                $('#reset-colors').css('background-color', dcpprimaryColor);
+                $('#reset-colors2').css('background-color', dcpprimaryColor);
+                $('#externalButton').css('background-color', dcpprimaryColor);
+
+
+                $('#dcp_submit-btn1').css('background-color', dcpprimaryColor);
+                $('#dcp_submit-btn2').css('background-color', dcpprimaryColor);
+                $('#dcp_submit-btn3').css('background-color', dcpprimaryColor);
+                $('#dcp_submit-btn4').css('background-color', dcpprimaryColor);
+
+                
+                // Secondary color
+                $('#body-color').css('background-color', dcpsecondaryColor);
+                $('#navbar').css('background-color', dcpsecondaryColor);
+                $('#navrail').css('background-color', dcpsecondaryColor);
+                $('#navoffcanvasbody').css('background-color', dcpsecondaryColor);
+
+                
+
+                $('#logoutwrapper').css('background-color', dcpsecondaryColor);
+
+
+                $('#primary-wrapper').css('background-color', dcpsecondaryColor);
+                $('#dyn-recipes-h1').css('background-color', dcpsecondaryColor);
+                $('#color-preview-form2').css('background-color', dcpsecondaryColor);
+                $('#sidebar-header').css('background-color', dcpsecondaryColor);
+                $('#sidebar-header').css('background-color', dcpsecondaryColor);
+                $('#history-card').css('background-color', dcpsecondaryColor);
+                $('#nb-dropmenu-content').css('background-color', dcpsecondaryColor);
+                $('#dropmenu-details-wrapper1').css('background-color', dcpsecondaryColor);
+                $('#dropmenu-details-wrapper2').css('background-color', dcpsecondaryColor);
+                // $('#logoutlink').css('background-color', dcpsecondaryColor);
+
+
+                // Tertiary color
+                $('#color-preview-form3').css('background-color', dcptertiary_color);
+                $('#offcanvasclosebtnicon').css('color', dcptertiary_color);
+                $('#offcanvasbrandname').css('color', dcptertiary_color);
+                $('.navicons').css('color', dcptertiary_color);
+                $('#footer').css('color', dcptertiary_color);
+                $('.footerlinks').css('color', dcptertiary_color);
+
+
+                $('#offcanvaslisttext1').css('color', dcptertiary_color);
+                $('#offcanvaslisttext2').css('color', dcptertiary_color);
+                $('#offcanvaslisttext3').css('color', dcptertiary_color);
+                $('#offcanvaslisttext4').css('color', dcptertiary_color);
+                $('#offcanvaslisttext5').css('color', dcptertiary_color);
+                $('#offcanvaslisttext6').css('color', dcptertiary_color);
+                $('#offcanvaslisttext7').css('color', dcptertiary_color);
+                $('#offcanvaslisttext8').css('color', dcptertiary_color);
+                $('#offcanvaslisttext9').css('color', dcptertiary_color);
+                $('#offcanvaslisttext10').css('color', dcptertiary_color);
+                $('#offcanvaslisttext11').css('color', dcptertiary_color);
+                $('#offcanvaslisttext12').css('color', dcptertiary_color);
+
+                $('#offcanvaslinkicons1').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons2').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons3').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons4').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons5').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons6').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons7').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons8').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons9').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons10').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons11').css('color', dcptertiary_color);
+
+                $('#bodylinkssecond').css('color', dcptertiary_color);
+                $('#bodylinksthird').css('color', dcptertiary_color);
+
+                $('#line-sep1').css('color', dcptertiary_color);
+                $('#line-sep2').css('color', dcptertiary_color);
+
+                $('#dyn-recipes-h1').css('color', dcptertiary_color);
+                $('#subheading').css('color', dcptertiary_color);
+                $('#sidebar-heading-h1').css('color', dcptertiary_color);
+                $('#navbar-brand-name').css('color', dcptertiary_color);
+                $('#navrail-text-active').css('color', dcptertiary_color);
+                $('#logouticon').css('color', dcptertiary_color);
+                $('#dropmenudetailslinks').css('color', dcptertiary_color);
+
+                $('#primary_color_btn').css('color', dcptertiary_color);
+                $('#secondary_color_btn').css('color', dcptertiary_color);
+                $('#tertiary_color_btn').css('color', dcptertiary_color);
+                $('#activelink_color_btn').css('color', dcptertiary_color);
+                $('#hover_color_btn').css('color', dcptertiary_color);
+                $('#nb-dropmenu-content').css('color', dcptertiary_color);
+                $('#dropmenu-details-wrapper1').css('color', dcptertiary_color);
+                $('#dropmenu-details-wrapper2').css('color', dcptertiary_color);
+                $('#back-btn-icon').css('color', dcptertiary_color);
+                $('.themetext').css('color', dcptertiary_color);
+
+
+                $('#reset-colors').css('color', dcptertiary_color);
+                $('#reset-colors2').css('color', dcptertiary_color);
+                $('#externalButton').css('color', dcptertiary_color);
+
+
+                $('#activelink_color_heading').css('color', dcptertiary_color);
+                $('#sidebar-subheading').css('color', dcptertiary_color);
+
+
+
+                $('#navrailicon1').css('color', dcptertiary_color);
+                $('#navrailicon2').css('color', dcptertiary_color);
+                $('#navrailicon3').css('color', dcptertiary_color);
+                $('#navrailicon4').css('color', dcptertiary_color);
+                $('#navrailicon5').css('color', dcptertiary_color);
+                $('#navrailicon6').css('color', dcptertiary_color);
+                $('#navrailicon7').css('color', dcptertiary_color);
+                $('#navrailicon8').css('color', dcptertiary_color);
+                $('#navrailicon9').css('color', dcptertiary_color);
+                $('#navrailicon10').css('color', dcptertiary_color);
+                $('#navrailicon11').css('color', dcptertiary_color);
+                $('#navrailicon12').css('color', dcptertiary_color);
+                $('#navrailicon13').css('color', dcptertiary_color);
+                $('#navrailicon14').css('color', dcptertiary_color);
+
+
+
+                $('#navrailtext1').css('color', dcptertiary_color);
+                $('#navrailtext2').css('color', dcptertiary_color);
+                $('#navrailtext3').css('color', dcptertiary_color);
+                $('#navrailtext4').css('color', dcptertiary_color);
+                $('#navrailtext5').css('color', dcptertiary_color);
+                $('#navrailtext6').css('color', dcptertiary_color);
+                $('#navrailtext7').css('color', dcptertiary_color);
+                $('#navrailtext8').css('color', dcptertiary_color);
+                $('#navrailtext9').css('color', dcptertiary_color);
+                $('#navrailtext10').css('color', dcptertiary_color);
+                $('#navrailtext11').css('color', dcptertiary_color);
+                $('#navrailtext12').css('color', dcptertiary_color);
+                $('#navrailtext13').css('color', dcptertiary_color);
+                $('#navrailtext14').css('color', dcptertiary_color);
+
+
+                // Link color
+                $('#color-preview-form4').css('background-color', dcpactivelink_color);
+                $('#dropmenu-child-active1').css('background-color', dcpactivelink_color);
+                $('#dropmenu-child-active2').css('background-color', dcpactivelink_color);
+                $('#listactive').css('background-color', dcpactivelink_color);
+                $('#offcanvaslisttext11').css('background-color', dcpactivelink_color);
+
+
+
+                $('#navrailiconactive1').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive2').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive3').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive4').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive5').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive6').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive7').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive8').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive9').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive10').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive11').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive12').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive13').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive14').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive15').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive16').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive17').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive18').css('background-color', dcpactivelink_color);
+
+
+                // Hover color
+                $('#color-preview-form5').css('background-color', dcphover_color);
+                $('#navrail-links-hover').css('background-color', dcphover_color);
+                
+                
+                
+            
+            },
+                error: function(xhr, status, error) {
+                    // handle error response, if any
+                }
+            });
+        });
+    });
+
+
+    // form 2
+    $(document).ready(function() {
+        $('#colorpaletteform2').on('submit', function(e) {
+            e.preventDefault(); // prevent the form from submitting normally
+            $.ajax({
+                type: 'POST',
+                url: '{% url "dcp_1" %}', // replace with your view URL
+                data: $(this).serialize(),
+                success: function(response) {
+                // update body background color
+                var dcpprimaryColor = $('#dcp_primary_color2').val();
+                var dcpsecondaryColor = $('#dcp_secondary_color2').val();
+                var dcptertiary_color = $('#dcp_tertiary_color2').val();
+                var dcpactivelink_color = $('#dcp_activelink_color2').val();
+                var dcphover_color = $('#dcp_hover_color2').val();
+
+
+                // Primary color
+                // $('#body-color').css('background-color', dcpprimaryColor);
+                // $('#navbar').css('background-color', dcpprimaryColor);
+                // $('#navrail').css('background-color', dcpprimaryColor);
+                $('#color-preview-form1').css('background-color', dcpprimaryColor);
+                $('#nb-rightimg-dropmenu').css('background-color', dcpprimaryColor);
+                $('#offcanvasExample').css('background-color', dcpprimaryColor);
+                $('#logoutcontainer').css('background-color', dcpprimaryColor);
+
+
+                // $('#logoutwrapper').css('background-color', dcpprimaryColor);
+                $('#logoutlink').css('background-color', dcpprimaryColor);
+                $('#dropmenudetailslinks').css('background-color', dcpprimaryColor);
+                $('#footerwaveline').css('background-color', dcpprimaryColor);
+
+
+                $('#primary_color_btn').css('background-color', dcpprimaryColor);
+                $('#secondary_color_btn').css('background-color', dcpprimaryColor);
+                $('#tertiary_color_btn').css('background-color', dcpprimaryColor);
+                $('#activelink_color_btn').css('background-color', dcpprimaryColor);
+                $('#hover_color_btn').css('background-color', dcpprimaryColor);
+
+                $('#reset-colors').css('background-color', dcpprimaryColor);
+                $('#reset-colors2').css('background-color', dcpprimaryColor);
+                $('#externalButton').css('background-color', dcpprimaryColor);
+
+
+                $('#dcp_submit-btn1').css('background-color', dcpprimaryColor);
+                $('#dcp_submit-btn2').css('background-color', dcpprimaryColor);
+                $('#dcp_submit-btn3').css('background-color', dcpprimaryColor);
+                $('#dcp_submit-btn4').css('background-color', dcpprimaryColor);
+
+                
+                // Secondary color
+                $('#body-color').css('background-color', dcpsecondaryColor);
+                $('#navbar').css('background-color', dcpsecondaryColor);
+                $('#navrail').css('background-color', dcpsecondaryColor);
+                $('#navoffcanvasbody').css('background-color', dcpsecondaryColor);
+                
+                $('#logoutwrapper').css('background-color', dcpsecondaryColor);
+
+                $('#primary-wrapper').css('background-color', dcpsecondaryColor);
+                $('#dyn-recipes-h1').css('background-color', dcpsecondaryColor);
+                $('#color-preview-form2').css('background-color', dcpsecondaryColor);
+                $('#sidebar-header').css('background-color', dcpsecondaryColor);
+                $('#sidebar-header').css('background-color', dcpsecondaryColor);
+                $('#history-card').css('background-color', dcpsecondaryColor);
+                $('#nb-dropmenu-content').css('background-color', dcpsecondaryColor);
+                $('#dropmenu-details-wrapper1').css('background-color', dcpsecondaryColor);
+                $('#dropmenu-details-wrapper2').css('background-color', dcpsecondaryColor);
+                // $('#logoutlink').css('background-color', dcpsecondaryColor);
+
+
+
+                // Tertiary color
+                $('#color-preview-form3').css('background-color', dcptertiary_color);
+                $('#offcanvasclosebtnicon').css('color', dcptertiary_color);
+                $('#offcanvasbrandname').css('color', dcptertiary_color);
+                $('.navicons').css('color', dcptertiary_color);
+                $('#footer').css('color', dcptertiary_color);
+                $('.footerlinks').css('color', dcptertiary_color);
+                
+                $('#offcanvaslisttext1').css('color', dcptertiary_color);
+                $('#offcanvaslisttext2').css('color', dcptertiary_color);
+                $('#offcanvaslisttext3').css('color', dcptertiary_color);
+                $('#offcanvaslisttext4').css('color', dcptertiary_color);
+                $('#offcanvaslisttext5').css('color', dcptertiary_color);
+                $('#offcanvaslisttext6').css('color', dcptertiary_color);
+                $('#offcanvaslisttext7').css('color', dcptertiary_color);
+                $('#offcanvaslisttext8').css('color', dcptertiary_color);
+                $('#offcanvaslisttext9').css('color', dcptertiary_color);
+                $('#offcanvaslisttext10').css('color', dcptertiary_color);
+                $('#offcanvaslisttext11').css('color', dcptertiary_color);
+                $('#offcanvaslisttext12').css('color', dcptertiary_color);
+
+                $('#offcanvaslinkicons1').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons2').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons3').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons4').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons5').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons6').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons7').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons8').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons9').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons10').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons11').css('color', dcptertiary_color);
+
+                $('#bodylinkssecond').css('color', dcptertiary_color);
+                $('#bodylinksthird').css('color', dcptertiary_color);
+
+                $('#line-sep1').css('color', dcptertiary_color);
+                $('#line-sep2').css('color', dcptertiary_color);
+
+                $('#dyn-recipes-h1').css('color', dcptertiary_color);
+                $('#subheading').css('color', dcptertiary_color);
+                $('#sidebar-heading-h1').css('color', dcptertiary_color);
+                $('#navbar-brand-name').css('color', dcptertiary_color);
+                $('#navrail-text-active').css('color', dcptertiary_color);
+                $('#logouticon').css('color', dcptertiary_color);
+                $('#dropmenudetailslinks').css('color', dcptertiary_color);
+
+                $('#primary_color_btn').css('color', dcptertiary_color);
+                $('#secondary_color_btn').css('color', dcptertiary_color);
+                $('#tertiary_color_btn').css('color', dcptertiary_color);
+                $('#activelink_color_btn').css('color', dcptertiary_color);
+                $('#hover_color_btn').css('color', dcptertiary_color);
+                $('#nb-dropmenu-content').css('color', dcptertiary_color);
+                $('#dropmenu-details-wrapper1').css('color', dcptertiary_color);
+                $('#dropmenu-details-wrapper2').css('color', dcptertiary_color);
+                $('#back-btn-icon').css('color', dcptertiary_color);
+                $('.themetext').css('color', dcptertiary_color);
+                
+                $('#reset-colors').css('color', dcptertiary_color);
+                $('#reset-colors2').css('color', dcptertiary_color);
+                $('#externalButton').css('color', dcptertiary_color);
+
+
+
+                $('#activelink_color_heading').css('color', dcptertiary_color);
+                $('#sidebar-subheading').css('color', dcptertiary_color);
+
+
+                $('#navrailicon1').css('color', dcptertiary_color);
+                $('#navrailicon2').css('color', dcptertiary_color);
+                $('#navrailicon3').css('color', dcptertiary_color);
+                $('#navrailicon4').css('color', dcptertiary_color);
+                $('#navrailicon5').css('color', dcptertiary_color);
+                $('#navrailicon6').css('color', dcptertiary_color);
+                $('#navrailicon7').css('color', dcptertiary_color);
+                $('#navrailicon8').css('color', dcptertiary_color);
+                $('#navrailicon9').css('color', dcptertiary_color);
+                $('#navrailicon10').css('color', dcptertiary_color);
+                $('#navrailicon11').css('color', dcptertiary_color);
+                $('#navrailicon12').css('color', dcptertiary_color);
+                $('#navrailicon13').css('color', dcptertiary_color);
+                $('#navrailicon14').css('color', dcptertiary_color);
+
+
+
+                $('#navrailtext1').css('color', dcptertiary_color);
+                $('#navrailtext2').css('color', dcptertiary_color);
+                $('#navrailtext3').css('color', dcptertiary_color);
+                $('#navrailtext4').css('color', dcptertiary_color);
+                $('#navrailtext5').css('color', dcptertiary_color);
+                $('#navrailtext6').css('color', dcptertiary_color);
+                $('#navrailtext7').css('color', dcptertiary_color);
+                $('#navrailtext8').css('color', dcptertiary_color);
+                $('#navrailtext9').css('color', dcptertiary_color);
+                $('#navrailtext10').css('color', dcptertiary_color);
+                $('#navrailtext11').css('color', dcptertiary_color);
+                $('#navrailtext12').css('color', dcptertiary_color);
+                $('#navrailtext13').css('color', dcptertiary_color);
+                $('#navrailtext14').css('color', dcptertiary_color);
+
+
+                // Link color
+                $('#color-preview-form4').css('background-color', dcpactivelink_color);
+                $('#dropmenu-child-active1').css('background-color', dcpactivelink_color);
+                $('#dropmenu-child-active2').css('background-color', dcpactivelink_color);
+                $('#listactive').css('background-color', dcpactivelink_color);
+                $('#offcanvaslisttext11').css('background-color', dcpactivelink_color);
+
+
+
+                $('#navrailiconactive1').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive2').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive3').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive4').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive5').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive6').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive7').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive8').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive9').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive10').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive11').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive12').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive13').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive14').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive15').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive16').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive17').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive18').css('background-color', dcpactivelink_color);
+
+
+                // Hover color
+                $('#color-preview-form5').css('background-color', dcphover_color);
+                $('#navrail-links-hover').css('background-color', dcphover_color);
+                
+                
+                
+            
+            },
+                error: function(xhr, status, error) {
+                    // handle error response, if any
+                }
+            });
+        });
+    });
+
+
+    // form 3
+    $(document).ready(function() {
+        $('#colorpaletteform3').on('submit', function(e) {
+            e.preventDefault(); // prevent the form from submitting normally
+            $.ajax({
+                type: 'POST',
+                url: '{% url "dcp_1" %}', // replace with your view URL
+                data: $(this).serialize(),
+                success: function(response) {
+                // update body background color
+                var dcpprimaryColor = $('#dcp_primary_color3').val();
+                var dcpsecondaryColor = $('#dcp_secondary_color3').val();
+                var dcptertiary_color = $('#dcp_tertiary_color3').val();
+                var dcpactivelink_color = $('#dcp_activelink_color3').val();
+                var dcphover_color = $('#dcp_hover_color3').val();
+
+
+                // Primary color
+                // $('#body-color').css('background-color', dcpprimaryColor);
+                // $('#navbar').css('background-color', dcpprimaryColor);
+                // $('#navrail').css('background-color', dcpprimaryColor);
+                $('#color-preview-form1').css('background-color', dcpprimaryColor);
+                $('#nb-rightimg-dropmenu').css('background-color', dcpprimaryColor);
+                $('#offcanvasExample').css('background-color', dcpprimaryColor);
+                $('#logoutcontainer').css('background-color', dcpprimaryColor);
+
+
+                // $('#logoutwrapper').css('background-color', dcpprimaryColor);
+                $('#logoutlink').css('background-color', dcpprimaryColor);
+                $('#dropmenudetailslinks').css('background-color', dcpprimaryColor);
+                $('#footerwaveline').css('background-color', dcpprimaryColor);
+
+                
+                $('#primary_color_btn').css('background-color', dcpprimaryColor);
+                $('#secondary_color_btn').css('background-color', dcpprimaryColor);
+                $('#tertiary_color_btn').css('background-color', dcpprimaryColor);
+                $('#activelink_color_btn').css('background-color', dcpprimaryColor);
+                $('#hover_color_btn').css('background-color', dcpprimaryColor);
+
+                $('#reset-colors').css('background-color', dcpprimaryColor);
+                $('#reset-colors2').css('background-color', dcpprimaryColor);
+                $('#externalButton').css('background-color', dcpprimaryColor);
+
+
+                $('#dcp_submit-btn1').css('background-color', dcpprimaryColor);
+                $('#dcp_submit-btn2').css('background-color', dcpprimaryColor);
+                $('#dcp_submit-btn3').css('background-color', dcpprimaryColor);
+                $('#dcp_submit-btn4').css('background-color', dcpprimaryColor);
+                
+                // Secondary color
+                $('#body-color').css('background-color', dcpsecondaryColor);
+                $('#navbar').css('background-color', dcpsecondaryColor);
+                $('#navrail').css('background-color', dcpsecondaryColor);
+                $('#navoffcanvasbody').css('background-color', dcpsecondaryColor);
+                
+                $('#logoutwrapper').css('background-color', dcpsecondaryColor);
+
+                $('#primary-wrapper').css('background-color', dcpsecondaryColor);
+                $('#dyn-recipes-h1').css('background-color', dcpsecondaryColor);
+                $('#color-preview-form2').css('background-color', dcpsecondaryColor);
+                $('#sidebar-header').css('background-color', dcpsecondaryColor);
+                $('#sidebar-header').css('background-color', dcpsecondaryColor);
+                $('#history-card').css('background-color', dcpsecondaryColor);
+                $('#nb-dropmenu-content').css('background-color', dcpsecondaryColor);
+                $('#dropmenu-details-wrapper1').css('background-color', dcpsecondaryColor);
+                $('#dropmenu-details-wrapper2').css('background-color', dcpsecondaryColor);
+                // $('#logoutlink').css('background-color', dcpsecondaryColor);
+
+
+                // Tertiary color
+                $('#color-preview-form3').css('background-color', dcptertiary_color);
+                $('#offcanvasclosebtnicon').css('color', dcptertiary_color);
+                $('#offcanvasbrandname').css('color', dcptertiary_color);
+                $('.navicons').css('color', dcptertiary_color);
+                $('#footer').css('color', dcptertiary_color);
+                $('.footerlinks').css('color', dcptertiary_color);
+                
+                $('#offcanvaslisttext1').css('color', dcptertiary_color);
+                $('#offcanvaslisttext2').css('color', dcptertiary_color);
+                $('#offcanvaslisttext3').css('color', dcptertiary_color);
+                $('#offcanvaslisttext4').css('color', dcptertiary_color);
+                $('#offcanvaslisttext5').css('color', dcptertiary_color);
+                $('#offcanvaslisttext6').css('color', dcptertiary_color);
+                $('#offcanvaslisttext7').css('color', dcptertiary_color);
+                $('#offcanvaslisttext8').css('color', dcptertiary_color);
+                $('#offcanvaslisttext9').css('color', dcptertiary_color);
+                $('#offcanvaslisttext10').css('color', dcptertiary_color);
+                $('#offcanvaslisttext11').css('color', dcptertiary_color);
+                $('#offcanvaslisttext12').css('color', dcptertiary_color);
+
+                $('#offcanvaslinkicons1').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons2').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons3').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons4').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons5').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons6').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons7').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons8').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons9').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons10').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons11').css('color', dcptertiary_color);
+
+                $('#bodylinkssecond').css('color', dcptertiary_color);
+                $('#bodylinksthird').css('color', dcptertiary_color);
+
+                $('#line-sep1').css('color', dcptertiary_color);
+                $('#line-sep2').css('color', dcptertiary_color);
+
+                $('#dyn-recipes-h1').css('color', dcptertiary_color);
+                $('#subheading').css('color', dcptertiary_color);
+                $('#sidebar-heading-h1').css('color', dcptertiary_color);
+                $('#navbar-brand-name').css('color', dcptertiary_color);
+                $('#navrail-text-active').css('color', dcptertiary_color);
+                $('#logouticon').css('color', dcptertiary_color);
+                $('#dropmenudetailslinks').css('color', dcptertiary_color);
+
+                $('#primary_color_btn').css('color', dcptertiary_color);
+                $('#secondary_color_btn').css('color', dcptertiary_color);
+                $('#tertiary_color_btn').css('color', dcptertiary_color);
+                $('#activelink_color_btn').css('color', dcptertiary_color);
+                $('#hover_color_btn').css('color', dcptertiary_color);
+                $('#nb-dropmenu-content').css('color', dcptertiary_color);
+                $('#dropmenu-details-wrapper1').css('color', dcptertiary_color);
+                $('#dropmenu-details-wrapper2').css('color', dcptertiary_color);
+                $('#back-btn-icon').css('color', dcptertiary_color);
+                $('.themetext').css('color', dcptertiary_color);
+
+
+                $('#reset-colors').css('color', dcptertiary_color);
+                $('#reset-colors2').css('color', dcptertiary_color);
+                $('#externalButton').css('color', dcptertiary_color);
+
+
+
+
+                $('#activelink_color_heading').css('color', dcptertiary_color);
+                $('#sidebar-subheading').css('color', dcptertiary_color);
+
+
+                $('#navrailicon1').css('color', dcptertiary_color);
+                $('#navrailicon2').css('color', dcptertiary_color);
+                $('#navrailicon3').css('color', dcptertiary_color);
+                $('#navrailicon4').css('color', dcptertiary_color);
+                $('#navrailicon5').css('color', dcptertiary_color);
+                $('#navrailicon6').css('color', dcptertiary_color);
+                $('#navrailicon7').css('color', dcptertiary_color);
+                $('#navrailicon8').css('color', dcptertiary_color);
+                $('#navrailicon9').css('color', dcptertiary_color);
+                $('#navrailicon10').css('color', dcptertiary_color);
+                $('#navrailicon11').css('color', dcptertiary_color);
+                $('#navrailicon12').css('color', dcptertiary_color);
+                $('#navrailicon13').css('color', dcptertiary_color);
+                $('#navrailicon14').css('color', dcptertiary_color);
+
+
+
+                $('#navrailtext1').css('color', dcptertiary_color);
+                $('#navrailtext2').css('color', dcptertiary_color);
+                $('#navrailtext3').css('color', dcptertiary_color);
+                $('#navrailtext4').css('color', dcptertiary_color);
+                $('#navrailtext5').css('color', dcptertiary_color);
+                $('#navrailtext6').css('color', dcptertiary_color);
+                $('#navrailtext7').css('color', dcptertiary_color);
+                $('#navrailtext8').css('color', dcptertiary_color);
+                $('#navrailtext9').css('color', dcptertiary_color);
+                $('#navrailtext10').css('color', dcptertiary_color);
+                $('#navrailtext11').css('color', dcptertiary_color);
+                $('#navrailtext12').css('color', dcptertiary_color);
+                $('#navrailtext13').css('color', dcptertiary_color);
+                $('#navrailtext14').css('color', dcptertiary_color);
+
+
+                // Link color
+                $('#color-preview-form4').css('background-color', dcpactivelink_color);
+                $('#dropmenu-child-active1').css('background-color', dcpactivelink_color);
+                $('#dropmenu-child-active2').css('background-color', dcpactivelink_color);
+                $('#listactive').css('background-color', dcpactivelink_color);
+                $('#offcanvaslisttext11').css('background-color', dcpactivelink_color);
+
+
+
+                $('#navrailiconactive1').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive2').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive3').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive4').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive5').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive6').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive7').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive8').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive9').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive10').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive11').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive12').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive13').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive14').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive15').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive16').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive17').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive18').css('background-color', dcpactivelink_color);
+
+
+                // Hover color
+                $('#color-preview-form5').css('background-color', dcphover_color);
+                $('#navrail-links-hover').css('background-color', dcphover_color);
+                
+                
+                
+            
+            },
+                error: function(xhr, status, error) {
+                    // handle error response, if any
+                }
+            });
+        });
+    });
+
+
+    // form 4
+    $(document).ready(function() {
+        $('#colorpaletteform4').on('submit', function(e) {
+            e.preventDefault(); // prevent the form from submitting normally
+            $.ajax({
+                type: 'POST',
+                url: '{% url "dcp_1" %}', // replace with your view URL
+                data: $(this).serialize(),
+                success: function(response) {
+                // update body background color
+                var dcpprimaryColor = $('#dcp_primary_color4').val();
+                var dcpsecondaryColor = $('#dcp_secondary_color4').val();
+                var dcptertiary_color = $('#dcp_tertiary_color4').val();
+                var dcpactivelink_color = $('#dcp_activelink_color4').val();
+                var dcphover_color = $('#dcp_hover_color4').val();
+
+
+                // Primary color
+                // $('#body-color').css('background-color', dcpprimaryColor);
+                // $('#navbar').css('background-color', dcpprimaryColor);
+                // $('#navrail').css('background-color', dcpprimaryColor);
+                $('#color-preview-form1').css('background-color', dcpprimaryColor);
+                $('#nb-rightimg-dropmenu').css('background-color', dcpprimaryColor);
+                $('#offcanvasExample').css('background-color', dcpprimaryColor);
+                $('#logoutcontainer').css('background-color', dcpprimaryColor);
+
+
+                // $('#logoutwrapper').css('background-color', dcpprimaryColor);
+                $('#logoutlink').css('background-color', dcpprimaryColor);
+                $('#dropmenudetailslinks').css('background-color', dcpprimaryColor);
+                $('#footerwaveline').css('background-color', dcpprimaryColor);
+
+
+                $('#primary_color_btn').css('background-color', dcpprimaryColor);
+                $('#secondary_color_btn').css('background-color', dcpprimaryColor);
+                $('#tertiary_color_btn').css('background-color', dcpprimaryColor);
+                $('#activelink_color_btn').css('background-color', dcpprimaryColor);
+                $('#hover_color_btn').css('background-color', dcpprimaryColor);
+
+                $('#reset-colors').css('background-color', dcpprimaryColor);
+                $('#reset-colors2').css('background-color', dcpprimaryColor);
+                $('#externalButton').css('background-color', dcpprimaryColor);
+
+
+                $('#dcp_submit-btn1').css('background-color', dcpprimaryColor);
+                $('#dcp_submit-btn2').css('background-color', dcpprimaryColor);
+                $('#dcp_submit-btn3').css('background-color', dcpprimaryColor);
+                $('#dcp_submit-btn4').css('background-color', dcpprimaryColor);
+                
+                // Secondary color
+                $('#body-color').css('background-color', dcpsecondaryColor);
+                $('#navbar').css('background-color', dcpsecondaryColor);
+                $('#navrail').css('background-color', dcpsecondaryColor);
+                $('#navoffcanvasbody').css('background-color', dcpsecondaryColor);
+                
+                $('#logoutwrapper').css('background-color', dcpsecondaryColor);
+                
+                $('#primary-wrapper').css('background-color', dcpsecondaryColor);
+                $('#dyn-recipes-h1').css('background-color', dcpsecondaryColor);
+                $('#color-preview-form2').css('background-color', dcpsecondaryColor);
+                $('#sidebar-header').css('background-color', dcpsecondaryColor);
+                $('#sidebar-header').css('background-color', dcpsecondaryColor);
+                $('#history-card').css('background-color', dcpsecondaryColor);
+                $('#nb-dropmenu-content').css('background-color', dcpsecondaryColor);
+                $('#dropmenu-details-wrapper1').css('background-color', dcpsecondaryColor);
+                $('#dropmenu-details-wrapper2').css('background-color', dcpsecondaryColor);
+                // $('#logoutlink').css('background-color', dcpsecondaryColor);
+
+
+                // Tertiary color
+                $('#color-preview-form3').css('background-color', dcptertiary_color);
+                $('#offcanvasclosebtnicon').css('color', dcptertiary_color);
+                $('#offcanvasbrandname').css('color', dcptertiary_color);
+                $('.navicons').css('color', dcptertiary_color);
+                $('#footer').css('color', dcptertiary_color);
+                $('.footerlinks').css('color', dcptertiary_color);
+                
+                $('#offcanvaslisttext1').css('color', dcptertiary_color);
+                $('#offcanvaslisttext2').css('color', dcptertiary_color);
+                $('#offcanvaslisttext3').css('color', dcptertiary_color);
+                $('#offcanvaslisttext4').css('color', dcptertiary_color);
+                $('#offcanvaslisttext5').css('color', dcptertiary_color);
+                $('#offcanvaslisttext6').css('color', dcptertiary_color);
+                $('#offcanvaslisttext7').css('color', dcptertiary_color);
+                $('#offcanvaslisttext8').css('color', dcptertiary_color);
+                $('#offcanvaslisttext9').css('color', dcptertiary_color);
+                $('#offcanvaslisttext10').css('color', dcptertiary_color);
+                $('#offcanvaslisttext11').css('color', dcptertiary_color);
+                $('#offcanvaslisttext12').css('color', dcptertiary_color);
+
+                $('#offcanvaslinkicons1').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons2').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons3').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons4').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons5').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons6').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons7').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons8').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons9').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons10').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons11').css('color', dcptertiary_color);
+
+                $('#bodylinkssecond').css('color', dcptertiary_color);
+                $('#bodylinksthird').css('color', dcptertiary_color);
+
+                $('#line-sep1').css('color', dcptertiary_color);
+                $('#line-sep2').css('color', dcptertiary_color);
+
+                $('#dyn-recipes-h1').css('color', dcptertiary_color);
+                $('#subheading').css('color', dcptertiary_color);
+                $('#sidebar-heading-h1').css('color', dcptertiary_color);
+                $('#navbar-brand-name').css('color', dcptertiary_color);
+                $('#navrail-text-active').css('color', dcptertiary_color);
+                $('#logouticon').css('color', dcptertiary_color);
+                $('#dropmenudetailslinks').css('color', dcptertiary_color);
+
+                $('#primary_color_btn').css('color', dcptertiary_color);
+                $('#secondary_color_btn').css('color', dcptertiary_color);
+                $('#tertiary_color_btn').css('color', dcptertiary_color);
+                $('#activelink_color_btn').css('color', dcptertiary_color);
+                $('#hover_color_btn').css('color', dcptertiary_color);
+                $('#nb-dropmenu-content').css('color', dcptertiary_color);
+                $('#dropmenu-details-wrapper1').css('color', dcptertiary_color);
+                $('#dropmenu-details-wrapper2').css('color', dcptertiary_color);
+                $('#back-btn-icon').css('color', dcptertiary_color);
+                $('.themetext').css('color', dcptertiary_color);
+
+
+                $('#reset-colors').css('color', dcptertiary_color);
+                $('#reset-colors2').css('color', dcptertiary_color);
+                $('#externalButton').css('color', dcptertiary_color);
+
+
+
+                $('#activelink_color_heading').css('color', dcptertiary_color);
+                $('#sidebar-subheading').css('color', dcptertiary_color);
+
+
+                $('#navrailicon1').css('color', dcptertiary_color);
+                $('#navrailicon2').css('color', dcptertiary_color);
+                $('#navrailicon3').css('color', dcptertiary_color);
+                $('#navrailicon4').css('color', dcptertiary_color);
+                $('#navrailicon5').css('color', dcptertiary_color);
+                $('#navrailicon6').css('color', dcptertiary_color);
+                $('#navrailicon7').css('color', dcptertiary_color);
+                $('#navrailicon8').css('color', dcptertiary_color);
+                $('#navrailicon9').css('color', dcptertiary_color);
+                $('#navrailicon10').css('color', dcptertiary_color);
+                $('#navrailicon11').css('color', dcptertiary_color);
+                $('#navrailicon12').css('color', dcptertiary_color);
+                $('#navrailicon13').css('color', dcptertiary_color);
+                $('#navrailicon14').css('color', dcptertiary_color);
+
+
+
+                $('#navrailtext1').css('color', dcptertiary_color);
+                $('#navrailtext2').css('color', dcptertiary_color);
+                $('#navrailtext3').css('color', dcptertiary_color);
+                $('#navrailtext4').css('color', dcptertiary_color);
+                $('#navrailtext5').css('color', dcptertiary_color);
+                $('#navrailtext6').css('color', dcptertiary_color);
+                $('#navrailtext7').css('color', dcptertiary_color);
+                $('#navrailtext8').css('color', dcptertiary_color);
+                $('#navrailtext9').css('color', dcptertiary_color);
+                $('#navrailtext10').css('color', dcptertiary_color);
+                $('#navrailtext11').css('color', dcptertiary_color);
+                $('#navrailtext12').css('color', dcptertiary_color);
+                $('#navrailtext13').css('color', dcptertiary_color);
+                $('#navrailtext14').css('color', dcptertiary_color);
+
+
+                // Link color
+                $('#color-preview-form4').css('background-color', dcpactivelink_color);
+                $('#dropmenu-child-active1').css('background-color', dcpactivelink_color);
+                $('#dropmenu-child-active2').css('background-color', dcpactivelink_color);
+                $('#listactive').css('background-color', dcpactivelink_color);
+                $('#offcanvaslisttext11').css('background-color', dcpactivelink_color);
+
+
+
+                $('#navrailiconactive1').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive2').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive3').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive4').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive5').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive6').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive7').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive8').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive9').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive10').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive11').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive12').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive13').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive14').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive15').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive16').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive17').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive18').css('background-color', dcpactivelink_color);
+
+
+                // Hover color
+                $('#color-preview-form5').css('background-color', dcphover_color);
+                $('#navrail-links-hover').css('background-color', dcphover_color);
+                
+                
+                
+            
+            },
+                error: function(xhr, status, error) {
+                    // handle error response, if any
+                }
+            });
+        });
+    });
+
+
+
+    // dark theme color
+    $(document).ready(function() {
+        $('#darkcolorpaletteform1').on('submit', function(e) {
+            e.preventDefault(); // prevent the form from submitting normally
+            $.ajax({
+                type: 'POST',
+                url: '{% url "dcp_1" %}', // replace with your view URL
+                data: $(this).serialize(),
+                success: function(response) {
+                // update body background color
+                var dcpprimaryColor = $('#dcp_primary_color6').val();
+                var dcpsecondaryColor = $('#dcp_secondary_color6').val();
+                var dcptertiary_color = $('#dcp_tertiary_color6').val();
+                var dcpactivelink_color = $('#dcp_activelink_color6').val();
+                var dcphover_color = $('#dcp_hover_color6').val();
+
+
+                // Primary color
+                // $('#body-color').css('background-color', dcpprimaryColor);
+                // $('#navbar').css('background-color', dcpprimaryColor);
+                // $('#navrail').css('background-color', dcpprimaryColor);
+                $('#color-preview-form1').css('background-color', dcpprimaryColor);
+                $('#nb-rightimg-dropmenu').css('background-color', dcpprimaryColor);
+                $('#offcanvasExample').css('background-color', dcpprimaryColor);
+                $('#logoutcontainer').css('background-color', dcpprimaryColor);
+
+                $('#logoutlink').css('background-color', dcpprimaryColor);
+                $('#dropmenudetailslinks').css('background-color', dcpprimaryColor);
+                $('#footerwaveline').css('background-color', dcpprimaryColor);
+
+
+                $('#primary_color_btn').css('background-color', dcpprimaryColor);
+                $('#secondary_color_btn').css('background-color', dcpprimaryColor);
+                $('#tertiary_color_btn').css('background-color', dcpprimaryColor);
+                $('#activelink_color_btn').css('background-color', dcpprimaryColor);
+                $('#hover_color_btn').css('background-color', dcpprimaryColor);
+
+                $('#reset-colors').css('background-color', dcpprimaryColor);
+                $('#reset-colors2').css('background-color', dcpprimaryColor);
+                $('#externalButton').css('background-color', dcpprimaryColor);
+
+
+                $('#dcp_submit-btn1').css('background-color', dcpprimaryColor);
+                $('#dcp_submit-btn2').css('background-color', dcpprimaryColor);
+                $('#dcp_submit-btn3').css('background-color', dcpprimaryColor);
+                $('#dcp_submit-btn4').css('background-color', dcpprimaryColor);
+                
+                // Secondary color
+                $('#body-color').css('background-color', dcpsecondaryColor);
+                $('#navbar').css('background-color', dcpsecondaryColor);
+                $('#navrail').css('background-color', dcpsecondaryColor);
+                $('#navoffcanvasbody').css('background-color', dcpsecondaryColor);
+                
+                $('#logoutwrapper').css('background-color', dcpsecondaryColor);
+
+                
+                $('#primary-wrapper').css('background-color', dcpsecondaryColor);
+                $('#dyn-recipes-h1').css('background-color', dcpsecondaryColor);
+                $('#color-preview-form2').css('background-color', dcpsecondaryColor);
+                $('#sidebar-header').css('background-color', dcpsecondaryColor);
+                $('#sidebar-header').css('background-color', dcpsecondaryColor);
+                $('#history-card').css('background-color', dcpsecondaryColor);
+                $('#nb-dropmenu-content').css('background-color', dcpsecondaryColor);
+                $('#dropmenu-details-wrapper1').css('background-color', dcpsecondaryColor);
+                $('#dropmenu-details-wrapper2').css('background-color', dcpsecondaryColor);
+
+
+
+                // Tertiary color
+                $('#color-preview-form3').css('background-color', dcptertiary_color);
+                $('#offcanvasclosebtnicon').css('color', dcptertiary_color);
+                $('#offcanvasbrandname').css('color', dcptertiary_color);
+                $('.navicons').css('color', dcptertiary_color);
+                $('#footer').css('color', dcptertiary_color);
+                $('.footerlinks').css('color', dcptertiary_color);
+                
+                $('#offcanvaslisttext1').css('color', dcptertiary_color);
+                $('#offcanvaslisttext2').css('color', dcptertiary_color);
+                $('#offcanvaslisttext3').css('color', dcptertiary_color);
+                $('#offcanvaslisttext4').css('color', dcptertiary_color);
+                $('#offcanvaslisttext5').css('color', dcptertiary_color);
+                $('#offcanvaslisttext6').css('color', dcptertiary_color);
+                $('#offcanvaslisttext7').css('color', dcptertiary_color);
+                $('#offcanvaslisttext8').css('color', dcptertiary_color);
+                $('#offcanvaslisttext9').css('color', dcptertiary_color);
+                $('#offcanvaslisttext10').css('color', dcptertiary_color);
+                $('#offcanvaslisttext11').css('color', dcptertiary_color);
+                $('#offcanvaslisttext12').css('color', dcptertiary_color);
+
+                $('#offcanvaslinkicons1').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons2').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons3').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons4').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons5').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons6').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons7').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons8').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons9').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons10').css('color', dcptertiary_color);
+                $('#offcanvaslinkicons11').css('color', dcptertiary_color);
+
+                $('#bodylinkssecond').css('color', dcptertiary_color);
+                $('#bodylinksthird').css('color', dcptertiary_color);
+
+                $('#line-sep1').css('color', dcptertiary_color);
+                $('#line-sep2').css('color', dcptertiary_color);
+
+                $('#dyn-recipes-h1').css('color', dcptertiary_color);
+                $('#subheading').css('color', dcptertiary_color);
+                $('#sidebar-heading-h1').css('color', dcptertiary_color);
+                $('#navbar-brand-name').css('color', dcptertiary_color);
+                $('#navrail-text-active').css('color', dcptertiary_color);
+                $('#logouticon').css('color', dcptertiary_color);
+                $('#dropmenudetailslinks').css('color', dcptertiary_color);
+
+                $('#logoutheading').css('color', dcptertiary_color);
+                $('#logouttext').css('color', dcptertiary_color);
+                $('#logoutfooter').css('color', dcptertiary_color);
+
+                
+
+                $('#primary_color_btn').css('color', dcptertiary_color);
+                $('#secondary_color_btn').css('color', dcptertiary_color);
+                $('#tertiary_color_btn').css('color', dcptertiary_color);
+                $('#activelink_color_btn').css('color', dcptertiary_color);
+                $('#hover_color_btn').css('color', dcptertiary_color);
+                $('#nb-dropmenu-content').css('color', dcptertiary_color);
+                $('#dropmenu-details-wrapper1').css('color', dcptertiary_color);
+                $('#dropmenu-details-wrapper2').css('color', dcptertiary_color);
+                $('#back-btn-icon').css('color', dcptertiary_color);
+                $('.themetext').css('color', dcptertiary_color);
+
+                $('#reset-colors').css('color', dcptertiary_color);
+                $('#reset-colors2').css('color', dcptertiary_color);
+                $('#externalButton').css('color', dcptertiary_color);
+
+
+
+                $('#activelink_color_heading').css('color', dcptertiary_color);
+                $('#sidebar-subheading').css('color', dcptertiary_color);
+
+
+                $('#navrailicon1').css('color', dcptertiary_color);
+                $('#navrailicon2').css('color', dcptertiary_color);
+                $('#navrailicon3').css('color', dcptertiary_color);
+                $('#navrailicon4').css('color', dcptertiary_color);
+                $('#navrailicon5').css('color', dcptertiary_color);
+                $('#navrailicon6').css('color', dcptertiary_color);
+                $('#navrailicon7').css('color', dcptertiary_color);
+                $('#navrailicon8').css('color', dcptertiary_color);
+                $('#navrailicon9').css('color', dcptertiary_color);
+                $('#navrailicon10').css('color', dcptertiary_color);
+                $('#navrailicon11').css('color', dcptertiary_color);
+                $('#navrailicon12').css('color', dcptertiary_color);
+                $('#navrailicon13').css('color', dcptertiary_color);
+                $('#navrailicon14').css('color', dcptertiary_color);
+
+
+
+                $('#navrailtext1').css('color', dcptertiary_color);
+                $('#navrailtext2').css('color', dcptertiary_color);
+                $('#navrailtext3').css('color', dcptertiary_color);
+                $('#navrailtext4').css('color', dcptertiary_color);
+                $('#navrailtext5').css('color', dcptertiary_color);
+                $('#navrailtext6').css('color', dcptertiary_color);
+                $('#navrailtext7').css('color', dcptertiary_color);
+                $('#navrailtext8').css('color', dcptertiary_color);
+                $('#navrailtext9').css('color', dcptertiary_color);
+                $('#navrailtext10').css('color', dcptertiary_color);
+                $('#navrailtext11').css('color', dcptertiary_color);
+                $('#navrailtext12').css('color', dcptertiary_color);
+                $('#navrailtext13').css('color', dcptertiary_color);
+                $('#navrailtext14').css('color', dcptertiary_color);
+
+
+                // Link color
+                $('#color-preview-form4').css('background-color', dcpactivelink_color);
+                $('#dropmenu-child-active1').css('background-color', dcpactivelink_color);
+                $('#dropmenu-child-active2').css('background-color', dcpactivelink_color);
+                $('#listactive').css('background-color', dcpactivelink_color);
+                $('#offcanvaslisttext11').css('background-color', dcpactivelink_color);
+
+
+
+                $('#navrailiconactive1').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive2').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive3').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive4').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive5').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive6').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive7').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive8').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive9').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive10').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive11').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive12').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive13').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive14').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive15').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive16').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive17').css('background-color', dcpactivelink_color);
+                $('#navrailiconactive18').css('background-color', dcpactivelink_color);
+
+
+                // Hover color
+                $('#color-preview-form5').css('background-color', dcphover_color);
+                $('#navrail-links-hover').css('background-color', dcphover_color);
+                
+                
+                
+            
+            },
+                error: function(xhr, status, error) {
+                    // handle error response, if any
+                }
+            });
+        });
+    });
+</script>
+    
+
+
+<script>
+    let dropdowns = document.querySelectorAll('.dropdown-toggle')
+    dropdowns.forEach((dd)=>{
+        dd.addEventListener('click', function (e) {
+            var el = this.nextElementSibling
+            el.style.display = el.style.display==='block'?'none':'block'
+        })
+    })
+    
+    $("a.darktheme-btn").click(function() {
+       $("#dropdownMenuLink").dropdown("toggle");
+    });
+    
+    $("a.darktheme-btn").click(function() {
+       $("#multilevelDropdownMenu1").dropdown("toggle");
+    });
+    
+    // $("#appearance-dropdown").click(function () {
+    //             $("#appearance-dropdown").toggleClass("appearance-dropdown-bgcolor");
+    //         });
+</script>
+
+
+<script>
+    // When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
+    window.onscroll = function() {scrollFunction()};
+    
+    function scrollFunction() {
+      if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+        document.getElementByClass("navbar").style.padding = "30px 10px";
+        document.getElementById("logo").style.fontSize = "25px";
+      } else {
+        document.getElementByClass("navbar").style.padding = "80px 10px";
+        document.getElementById("logo").style.fontSize = "35px";
+      }
+    }
+</script>
+
+
+
+<!-- Logout Modal -->
+
+<div class="modal fade Modal-logout" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content logoutmodal">
+            <div class="modal-header">
+                <h5 class="modal-title">Yummy Recipes</h5>
+                <button type="button" class="btn btn-transparent modal-close-btn" data-bs-dismiss="modal" aria-label="Close"><span class="material-symbols-rounded md-top-closeicon">close</span></button>
+            </div>
+
+            <div class="modal-body">
+                <h2>Logout</h2>
+                <p2 class="del-text">Are you sure you want to logout?</p2>
+            </div>
+
+            <div class="modal-footer" id="logoutfooter">
+                <button type="button" class="btn btn-light footerbtn" data-bs-dismiss="modal">Cancel</button>
+                <a class="btn btn-transparent" href="{% url 'logout' %}">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Recipe search modal -->
+
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-search modal-fullscreen-md-down">
+        <div class="modal-content logoutmodal modal-search weathermodal">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Search recipes</h5>
+                <button type="button" class="btn btn-transparent modal-close-btn" data-bs-dismiss="modal" aria-label="Close"><span class="material-symbols-rounded md-top-closeicon">close</span></button>
+            </div>
+
+            <div class="modal-body">
+                
+                <form method="POST" id="searchform" action="{% url 'searchresults' %}" class="searchbar" autocomplete="off">
+                    {% csrf_token %}
+
+                    <div class="autocomplete">
+                      <input id="idquery" type="text" name="query" placeholder="Search recipes">
+                      
+                    </div>
+
+                </form>
+                                   
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light footerbtn" data-bs-dismiss="modal">Close</button>
+                <a class="btn btn-transparent footer-btn delete-btn logout-modal-btn" id="searchButton" class="btn btn-primary">Search</a>
+                
+                <!-- <button type="button" class="btn btn-transparent footer-btn delete-btn logout-modal-btn" id="submitButton" class="btn btn-primary">Save</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recipe search form with submit outside the form -->
+<script>
+    // Get the form and submit button elements
+    const myForm = document.getElementById('searchform');
+    const submitButton = document.getElementById('searchButton');
+  
+    // Add a click event listener to the submit button
+    submitButton.addEventListener('click', () => {
+      // Submit the form programmatically
+      myForm.submit();
+    });
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        $('#logoutlink').on('click', function() {
+        $(this).addClass('clicked');
+    });
+
+    $('#logoutModal').on('show.bs.modal', function() {
+        $('#logoutlink').addClass('clicked');
+    });
+
+    $('#logoutModal').on('hidden.bs.modal', function() {
+        $('#logoutlink').removeClass('clicked');
+    });
+    });
+
+</script>
+
+
+<!-- weather modal -->
+<div class="modal fade Modal-logout" id="weatherModal" tabindex="-1" aria-labelledby="weatherModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen-sm-down">
+      <div class="modal-content logoutmodal weathermodal">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Weather</h5>
+          <button type="button" class="btn btn-transparent modal-close-btn" data-bs-dismiss="modal" aria-label="Close"><span class="material-symbols-rounded md-top-closeicon">close</span></button>
+        </div>
+
+        <div class="modal-body">
+            <form id="locationFormnew" method="post" action="{% url 'save_location' %}">
+                {% csrf_token %}
+                
+                <input type="text" name="location" maxlength="100" value="{{user.userlocation.location}}" required="required" id="id_location" placeholder="Search places">
+                <!-- <button type="submit">Save</button> -->
+            </form>                         
+
+            
+            {% if not user.userlocation.location == '' %}
+                <table class="table-borderless">
+                <tr>
+                    <th><span class="material-symbols-rounded">location_on</span></th>
+                    <th>Location</th>
+                    <td><span id="Location"></span></td>
+                </tr>
+                <tr>
+                    <th><span class="material-symbols-rounded">thermostat</span></th>
+                    <th>Temperature</th>
+                    <td>
+                        <ul style="display: inline-block;">
+                            <li><img id="weatherIcon" src="" alt="Weather Icon"></li>
+                            <li><span id="temperature"></span> °C</li>
+                        </ul> 
+                    </td>
+                </tr>
+                <tr>
+                    <th><span class="material-symbols-rounded">cloud</span></th>
+                    <th>Description</th>
+                    <td><span id="Description"></span></td>
+                </tr>
+                <tr>
+                    <th><span class="material-symbols-rounded">humidity_low</span></th>
+                    <th>Humidity</th>
+                    <td><span id="Humidity"></span></td>
+                </tr>
+                <tr>
+                    <th><span class="material-symbols-rounded">air</span></th>
+                    <th>Wind speed</th>
+                    <td><span id="Wind_speed"></span> m/s</td>
+                </tr>
+                <tr>
+                    <th><span class="material-symbols-rounded">arrow_upward</span></th>
+                    <th>High</th>
+                    <td><span id="Min_temperature"></span> °C</td>
+                </tr>
+                <tr>
+                    <th><span class="material-symbols-rounded">arrow_downward</span></th>
+                    <th>Low</th>
+                    <td><span id="Max_temperature"></span> °C</td>
+                </tr>
+                </table>
+            {% else %}
+
+            {% endif %}
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-transparent footer-btn cancel-btn" data-bs-dismiss="modal">Close</button>
+          <a class="btn btn-transparent footer-btn delete-btn logout-modal-btn" id="submitButton" class="btn btn-primary">Save</a>
+          
+          <!-- <button type="button" class="btn btn-transparent footer-btn delete-btn logout-modal-btn" id="submitButton" class="btn btn-primary">Save</button> -->
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- submit & fetching weather data -->
+<script>
+    $(document).ready(function() {
+        // Function to fetch weather data and update HTML
+        function navbarupdateWeatherData() {
+            // Send an AJAX request to get the weather data
+            $.ajax({
+                url: "{% url 'save_location' %}",
+                type: 'GET',
+                success: function(response) {
+                    // Update the weather data on success
+                    if (response.weather_data) {
+                        var weatherData = response.weather_data;
+                        var decodedLocation = decodeURIComponent(weatherData.location);
+                        var formattedLocation = decodedLocation.text().replace(/\+/g, ' ');
+                        
+                        $('.weather-data p').html(
+                            'Location: ' + formattedLocation + '<br>' +
+                            'Temperature: ' + weatherData.temp + '°C' + '<br>' +
+                            'Description: ' + weatherData.des
+                        );
+
+                        // Close the modal
+                        // $('#weatherModal').modal('hide');
+
+                    }
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.log('Error:', errorThrown);
+                }
+            });
+        }
+
+        // Function to submit the form and update weather data
+        function navbarsubmitForm() {
+            // Get the form data
+            var form = $('#locationFormnew');
+            var formData = form.serialize();
+
+            // Send an AJAX request to save the location
+            $.ajax({
+                url: form.attr('action'),
+                type: form.attr('method'),
+                data: formData,
+                success: function(response) {
+                    // Update the weather data on success
+                    if (response.weather_data) {
+                        var weatherData = response.weather_data;                                                
+                        $('#Location').text(weatherData.location);
+                        $('#temperature').text(weatherData.temp);
+                        $('#Description').text(weatherData.des);
+                        $('#Humidity').text(weatherData.humidity);
+                        $('#Wind_speed').text(weatherData.wind_speed);
+                        $('#Min_temperature').text(weatherData.min);
+                        $('#Max_temperature').text(weatherData.max);
+
+
+                        $('#weatherIcon').attr('src', 'http://openweathermap.org/img/w/' + weatherData.icon + '.png');
+
+                        $('#navbartemperature').text(weatherData.temp);
+                        $('#navbarweatherIcon').attr('src', 'http://openweathermap.org/img/w/' + weatherData.icon + '.png');
+
+                        $('#navbartemperature2').text(weatherData.temp);
+                        $('#navbarweatherIcon2').attr('src', 'http://openweathermap.org/img/w/' + weatherData.icon + '.png');
+                            
+                    
+                    }
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.log('Error:', errorThrown);
+                }
+            });
+        }
+
+        // Auto-submit the form on page load
+        navbarsubmitForm();
+
+        // Prevent form submission when enter key is pressed
+        $('#id_location').on('keydown', function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        // Periodically fetch weather data and update HTML every 10 minutes
+        setInterval(navbarupdateWeatherData, 10 * 60 * 1000); // 10 minutes in milliseconds
+
+
+        // Submit the form using button outside of form
+        $('#submitButton').on('click', function(event) {
+            event.preventDefault();  // Prevent the default form submission
+            navbarsubmitForm();
+        });
+    });
+</script>
+
+
+<!-- Search autocomplete -->
+
+<script>
+    function autocomplete(inp, arr) {
+      /*the autocomplete function takes two arguments,
+      the text field element and an array of possible autocompleted values:*/
+      var currentFocus;
+      /*execute a function when someone writes in the text field:*/
+      inp.addEventListener("input", function(e) {
+          var a, b, i, val = this.value;
+          /*close any already open lists of autocompleted values*/
+          closeAllLists();
+          if (!val) { return false;}
+          currentFocus = -1;
+          /*create a DIV element that will contain the items (values):*/
+          a = document.createElement("DIV");
+          a.setAttribute("id", this.id + "autocomplete-list");
+          a.setAttribute("class", "autocomplete-items");
+          /*append the DIV element as a child of the autocomplete container:*/
+          this.parentNode.appendChild(a);
+          /*for each item in the array...*/
+          for (i = 0; i < arr.length; i++) {
+            /*check if the item starts with the same letters as the text field value:*/
+            if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+              /*create a DIV element for each matching element:*/
+              b = document.createElement("DIV");
+              /*make the matching letters bold:*/
+              b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+              b.innerHTML += arr[i].substr(val.length);
+              /*insert a input field that will hold the current array item's value:*/
+              b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+              /*execute a function when someone clicks on the item value (DIV element):*/
+              b.addEventListener("click", function(e) {
+                  /*insert the value for the autocomplete text field:*/
+                  inp.value = this.getElementsByTagName("input")[0].value;
+                  /*close the list of autocompleted values,
+                  (or any other open lists of autocompleted values:*/
+                  closeAllLists();
+              });
+              a.appendChild(b);
+            }
+          }
+      });
+      /*execute a function presses a key on the keyboard:*/
+      inp.addEventListener("keydown", function(e) {
+          var x = document.getElementById(this.id + "autocomplete-list");
+          if (x) x = x.getElementsByTagName("div");
+          if (e.keyCode == 40) {
+            /*If the arrow DOWN key is pressed,
+            increase the currentFocus variable:*/
+            currentFocus++;
+            /*and and make the current item more visible:*/
+            addActive(x);
+          } else if (e.keyCode == 38) { //up
+            /*If the arrow UP key is pressed,
+            decrease the currentFocus variable:*/
+            currentFocus--;
+            /*and and make the current item more visible:*/
+            addActive(x);
+          } else if (e.keyCode == 13) {
+            /*If the ENTER key is pressed, prevent the form from being submitted,*/
+            e.preventDefault();
+            if (currentFocus > -1) {
+              /*and simulate a click on the "active" item:*/
+              if (x) x[currentFocus].click();
+            }
+          }
+      });
+      function addActive(x) {
+        /*a function to classify an item as "active":*/
+        if (!x) return false;
+        /*start by removing the "active" class on all items:*/
+        removeActive(x);
+        if (currentFocus >= x.length) currentFocus = 0;
+        if (currentFocus < 0) currentFocus = (x.length - 1);
+        /*add class "autocomplete-active":*/
+        x[currentFocus].classList.add("autocomplete-active");
+      }
+      function removeActive(x) {
+        /*a function to remove the "active" class from all autocomplete items:*/
+        for (var i = 0; i < x.length; i++) {
+          x[i].classList.remove("autocomplete-active");
+        }
+      }
+      function closeAllLists(elmnt) {
+        /*close all autocomplete lists in the document,
+        except the one passed as an argument:*/
+        var x = document.getElementsByClassName("autocomplete-items");
+        for (var i = 0; i < x.length; i++) {
+          if (elmnt != x[i] && elmnt != inp) {
+            x[i].parentNode.removeChild(x[i]);
+          }
+        }
+      }
+      /*execute a function when someone clicks in the document:*/
+      document.addEventListener("click", function (e) {
+          closeAllLists(e.target);
+      });
+    }
+    
+    /*An array containing all the country names in the world:*/
+    var titles = [
+		  "{% for tlist in titles %}",
+		  "{{tlist.title}}{% endfor %}"
+	];
+    
+    /*initiate the autocomplete function on the "idquery" element, and pass along the countries array as possible autocomplete values:*/
+    autocomplete(document.getElementById("idquery"), titles);
+</script>
+
+</html>

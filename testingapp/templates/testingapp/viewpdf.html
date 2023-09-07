@@ -1,0 +1,162 @@
+{% load hitcount_tags %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <title>{{recipes.title}} </title>
+</head>
+
+<style>
+    html *{
+        font-family: 'Noto Sans', sans-serif;
+    }
+
+    .recipe-ingre,.rec-title{
+        background: whitesmoke;
+    }
+
+    .rec-title{
+        padding: 15px 15px 0 15px;
+    }
+
+    .rec-title h2{
+        font-size: 2.2em;
+    }
+
+    .recipe-data{
+        font-size: 1.45em;
+    }
+
+
+    .recipe-ingre thead th,.recipe-ingre tr{
+        text-align: justify;
+    }
+
+    table {
+        background: whitesmoke;
+        /* border: 2px solid red; */
+    }
+
+    table thead tr{
+        background: rgb(225, 225, 225);
+        /* border-bottom: 1px solid gainsboro; */
+        padding: 9px 7px 4px 7px;
+    }
+
+    table tr{
+        /* background: palegoldenrod; */
+        text-align: center;
+        padding: 7px;
+    }
+</style>
+
+<body>
+    <h1 style="text-align:center;font-size:2.5em;margin-bottom: 0;padding-top: 15px;">Recipe Card</h1>
+    <!-- <hr> -->
+
+    <div class="rec-title">
+        <h2>
+            {% if 'recipe' in recipes.title %}
+                {{ recipes.title }}
+            {% else %}
+                {{ recipes.title }} recipe
+            {% endif %}
+        </h2>
+    </div>
+    
+
+    <!-- <img src="{{ recipes.image.url }}"> -->
+   
+    <!-- <img src="media/{{recipes.image}}" alt="{{recipes.title}}" height="300px"> -->
+
+    <div class="recipe-data">
+
+        <table class="recipe-ingre">
+            <thead>
+                <tr>
+                    <th><h3>Ingredients</h3></th>
+                </tr>
+            </thead>
+
+            <tr>
+                <td><p>{{recipes.ingredients}}</p></td>
+            </tr>
+        </table>
+
+        <br>
+
+        {% for i in post.photo_set.all %}
+        {% if forloop.counter0 == 0 %}
+            <img src="{{ i.image.url }}" class="widget-image" alt="..." >
+        {% endif %}
+        {% empty %}
+            <img src="{% static 'testingapp/media/empty4.jpg' %}" class="widget-image">
+        {% endfor %}
+
+        
+        <img src="{% static 'testingapp/media/empty4.jpg' %}" class="widget-image">
+
+
+        <table class="recipe-table">
+            <thead>
+                <tr>
+                    <th>Preparation time</th>
+                    <th>Servings</th>
+                    <th>Type</th>
+                    <th>Cuisine</th>
+                    <th>Category</th>
+                    <!-- <th>Views</th> -->
+                </tr>
+            </thead>
+    
+            <tr>
+                <td>{{recipes.timing}} min</td>
+                <td>{{recipes.servings}}</td>
+                <td>{{recipes.type}}</td>
+                <td>{{recipes.cuisine}}</td>
+                <td>{{recipes.category}}</td>
+                <!-- <td>{% get_hit_count for recipes %}</td> -->
+            </tr>
+        </table>
+
+        <br>
+
+        <table class="recipe-ingre">
+            <thead>
+                <tr>
+                    <th><h3>How to prepare</h3></th>
+                </tr>
+            </thead>
+
+            <tr>
+                <td><p>{{recipes.content|safe}}</p></td>
+            </tr>
+        </table>
+        
+        <br>
+       <hr>
+
+        <p style="text-align: center;">By : {{ recipes.author.first_name }} {{ recipes.author.last_name }} &nbsp; | &nbsp;
+            
+            Uploaded : {{ recipes.get_date }} &nbsp; | &nbsp; Updated : {{ recipes.get_modified_date }}
+        </p>
+
+    </div>
+    
+
+
+
+
+    
+</body>
+</html>

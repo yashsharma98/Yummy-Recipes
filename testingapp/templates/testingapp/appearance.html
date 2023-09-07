@@ -1,0 +1,1244 @@
+{% extends 'testingapp/newnavbar_navrail.html' %}
+
+{% load hitcount_tags %}
+
+{% load static %}
+
+
+{% block css %}
+{% endblock %}
+
+
+{% block title %}
+<title>Appearance</title>
+{% endblock %}
+
+{% block weather_widget %}
+{% endblock %}
+
+{% block sm_weather %}
+{% endblock %}
+
+{% block style %}
+
+{% endblock %}
+
+<style>
+ 
+
+
+
+
+</style>
+
+{% block content%}
+
+<body>
+
+{% if user.is_authenticated %}
+
+
+
+<div class="primary-wrapper" id="primary-wrapper">
+    <div class="secondary-wrapper">
+
+      <div class="container container-flex container-flex-2">
+
+        <main role="main" class="container-main">
+
+          <div class="dynamic-recipes dynamic-header tertiary-wrapper no-animation-heading">
+                   
+            <h1 id="dyn-recipes-h1"><button class="btn btn-light back-btn" onclick="history.back()"><span class="material-symbols-rounded back-btn-icon" id="back-btn-icon">arrow_back</span></button> 
+              Appearance
+            </h1>
+
+            <p class="sub-heading no-subheading-animation" id="subheading">Create your personalized theme</p>
+
+            <!-- light theme tab -->
+
+            {% if user.userprofile.theme == 'Dark theme' %}
+
+            <div class="dark-mode-wrapper">
+              {% if user.userprofile.theme == 'Dark theme' %}
+              
+              <div class="theme-builder-forms dark-mode" id="theme-forms">
+                <div class="apply-darktheme-card">
+                  <h6 class="themetext">Switch to light theme</h6>
+                  <div class="reset-color-btn">
+                    <button type="button" id="reset-colors">Light theme</button>
+                  </div>
+                </div>
+              </div>
+              
+              <h4>Customize dark theme</h4>
+              <div class="theme-builder-forms dark-mode">
+
+                <h4>Primary color</h4>
+                <div class="recipe-form-container mb-3 theme-container" id="color-preview-form1">
+                  <div class="theme-form-wrapper">
+                    <form class="row m-1" id="color-form" class="form1" action="{% url 'appearance' %}" method="POST">
+                      {% csrf_token %}
+    
+                      <input type="hidden" name="form_type" value="colorform">
+    
+                      <div class="col-md-2 theme-color-picker">
+                        <!-- <label for="exampleColorInput" class="form-label">Color picker</label> -->
+                        <input type="color" id="primary_color" name="primary_color" class="form-control form-control-color" value="{{ user.userprofile.primary_color }}" title="Choose primary color">
+
+                      </div>
+                  
+                      {% if user.userprofile.primary_color == "CHOOSE" %}
+                        <p id="primaryColor">#000000</p> 
+                      {% elif user.userprofile.primary_color != "CHOOSE" %}
+                        <p id="primaryColor">{{user.userprofile.primary_color}}</p>
+                      {% endif %}
+
+                      <div class="form-submit-btns">
+                        <button type="submit" class="btn btn-light" id="primary_color_btn">Save primary_color</button>
+                      </div>
+    
+                      <!-- <div class="col-md-10 theme-form-label djids">
+                        <label for="inputPassword4" class="form-label">First preview</label>
+                        <div id="color-preview" class="form-control"></div>
+                      </div> -->
+    
+                    </form>
+                  </div>
+                </div>
+                  
+                <!-- <hr class="mt-3 mb-3 hr-line-divider"> -->
+
+                <h4>Secondary color</h4>
+                <div class="recipe-form-container mb-3 theme-container" id="color-preview-form2">
+                  <div class="theme-form-wrapper" >
+                    <form class="row m-1" id="color-form2" action="{% url 'appearance' %}" method="POST">
+                      {% csrf_token %}
+    
+                      <input type="hidden" name="form_type" value="colorform2">
+    
+                      <div class="col-md-2 theme-color-picker">
+                        <!-- <label for="exampleColorInput" class="form-label">Color picker</label> -->
+                        <input type="color" id="secondary_color" name="secondary_color" class="form-control form-control-color" value="{{ user.userprofile.secondary_color }}" title="Choose secondary color">
+                      </div>
+
+                      {% if user.userprofile.secondary_color == "CHOOSE" %}
+                        <p id="secondaryColor">#000000</p>
+                      {% elif user.userprofile.secondary_color != "CHOOSE" %}
+                        <p id="secondaryColor">{{user.userprofile.secondary_color}}</p>
+                      {% endif %}
+    
+                      <!-- <div class="col-md-10">
+                        <label for="inputPassword4" class="form-label">First preview</label>
+                        <div id="color-preview2" class="form-control" style="width: 100%; height: 100%; border: 1px solid black;"></div>
+                      </div> -->
+                      
+                      <div class="form-submit-btns">
+                        <button type="submit" name="form2_submit" class="btn btn-light" id="secondary_color_btn">Save secondary_color</button>
+                      </div>
+                      
+                    </form>
+                  </div>
+                </div>
+
+                <h4>Tertiary color</h4>
+                <div class="recipe-form-container mb-3 theme-container" id="color-preview-form3">
+                  <div class="theme-form-wrapper" >
+                    <form class="row m-1" id="color-form3" action="{% url 'appearance' %}" method="POST">
+                      {% csrf_token %}
+    
+                      <input type="hidden" name="form_type" value="colorform3">
+    
+                      <div class="col-md-2 theme-color-picker">
+                        <!-- <label for="exampleColorInput" class="form-label">Color picker</label> -->
+                        <input type="color" id="tertiary_color" name="tertiary_color" class="form-control form-control-color" value="{{ user.userprofile.tertiary_color }}" title="Choose tertiary color">
+                      </div>
+    
+                      {% if user.userprofile.tertiary_color == "CHOOSE" %}
+                        <p id="tertiaryColor">#000000</p>
+                      {% elif user.userprofile.tertiary_color != "CHOOSE" %}
+                        <p id="tertiaryColor">{{user.userprofile.tertiary_color}}</p>
+                      {% endif %}
+                      
+                      <div class="form-submit-btns">
+                        <button type="submit" name="form2_submit" class="btn btn-light" id="tertiary_color_btn">Save tertiary_color</button>
+                      </div>
+                      
+                    </form>
+                  </div>
+                </div>
+
+                <h4>Link color</h4>
+                <div class="recipe-form-container mb-3 theme-container" id="color-preview-form4">
+                  <div class="theme-form-wrapper">
+                    <form class="row m-1" id="color-form4" action="{% url 'appearance' %}" method="POST">
+                      {% csrf_token %}
+    
+                      <input type="hidden" name="form_type" value="colorform4">
+    
+                      <div class="col-md-2 theme-color-picker">
+                        <!-- <label for="exampleColorInput" class="form-label">Color picker</label> -->
+                        <input type="color" id="active_link_color" name="active_link_color" class="form-control form-control-color" value="{{ user.userprofile.active_link_color }}" title="Choose active link color">
+                      </div>
+    
+                      {% if user.userprofile.active_link_color == "CHOOSE" %}
+                        <p id="activelinkColor">#000000</p>
+                      {% elif user.userprofile.active_link_color != "CHOOSE" %}
+                        <p id="activelinkColor">{{user.userprofile.active_link_color}}</p>
+                      {% endif %}
+                      
+                      <div class="form-submit-btns">
+                        <button type="submit" name="form2_submit" class="btn btn-light" id="activelink_color_btn">Save active_link_color</button>
+                      </div>
+                      
+                    </form>
+                  </div>
+                </div>
+
+                <h4>Hover color</h4>
+                <div class="recipe-form-container mb-1 theme-container" id="color-preview-form5">
+                  <div class="theme-form-wrapper" >
+                    <form class="row m-1" id="color-form5" action="{% url 'appearance' %}" method="POST">
+                      {% csrf_token %}
+    
+                      <input type="hidden" name="form_type" value="colorform5">
+    
+                      <div class="col-md-2 theme-color-picker">
+                        <!-- <label for="exampleColorInput" class="form-label">Color picker</label> -->
+                        <input type="color" id="hover_color" name="hover_color" class="form-control form-control-color" value="{{ user.userprofile.hover_color }}" title="Choose hover color">
+                      </div>
+    
+                      {% if user.userprofile.hover_color == "CHOOSE" %}
+                        <p id="hoverColor">#000000</p>
+                      {% elif user.userprofile.hover_color != "CHOOSE" %}
+                        <p id="hoverColor">{{user.userprofile.hover_color}}</p>
+                      {% endif %}
+                      
+                      <div class="form-submit-btns">
+                        <button type="submit" name="form2_submit" class="btn btn-light" id="hover_color_btn">Save hover_color</button>
+                      </div>
+                      
+                    </form>
+                  </div>
+                </div>
+
+              </div>
+            
+              {% endif %}
+
+            </div>
+            
+            {% else %}
+
+              <div class="theme-builder-forms light-mode" id="theme-forms">
+                <div class="apply-darktheme-card">
+                  <h6 class="themetext">Switch to dark theme</h6>
+                  <div class="reset-color-btn">
+                    <button type="button" id="externalButton">Dark theme</button>
+                  </div>
+                </div>
+              </div>
+
+              <form id="myForm" style="display: none;" action="{% url 'appearance' %}" method="POST">
+                {% csrf_token %}
+                <!-- Form fields and other elements go here -->
+                <input type="hidden" name="dark_form" value="darkcolorform">
+
+                <div class="col-md-4 theme-color-picker" style="width: 100%;">
+                  <label for="exampleColorInput" class="form-label">Theme</label>
+                  <input type="hidden" id="theme" name="theme" class="form-control form-control-color" value="Dark theme"  style="width: 100%;" title="Dark theme" readonly>
+                </div>
+
+                <div class="col-md-2 theme-color-picker">
+                  <!-- <label for="exampleColorInput" class="form-label">Color picker</label> -->
+                  <input type="hidden" id="" name="primary_color" class="form-control form-control-color" value="#414141" title="Choose primary color">
+                </div>
+
+                <div class="col-md-2 theme-color-picker">
+                  <!-- <label for="exampleColorInput" class="form-label">Color picker</label> -->
+                  <input type="hidden" id="" name="secondary_color" class="form-control form-control-color" value="#323232" title="Choose secondary color">
+                </div>
+
+                <div class="col-md-2 theme-color-picker">
+                  <!-- <label for="exampleColorInput" class="form-label">Color picker</label> -->
+                  <input type="hidden" id="" name="tertiary_color" class="form-control form-control-color" value="#D9D9D9" title="Choose tertiary color">
+                </div>
+
+                <div class="col-md-2 theme-color-picker">
+                  <!-- <label for="exampleColorInput" class="form-label">Color picker</label> -->
+                  <input type="hidden" id="" name="active_link_color" class="form-control form-control-color" value="#1A5F7A" title="Choose active link color">
+                </div>
+
+                <div class="col-md-2 theme-color-picker">
+                  <!-- <label for="exampleColorInput" class="form-label">Color picker</label> -->
+                  <input type="hidden" id="" name="hover_color" class="form-control form-control-color" value="#526D82" title="Choose hover color">
+                </div>
+
+              </form>
+
+              <br>
+
+              <div class="theme-builder-forms light-mode">
+                <h4>Primary color</h4>
+                <div class="recipe-form-container mb-3 theme-container" id="color-preview-form1">
+                  <div class="theme-form-wrapper">
+                    <form class="row m-1" id="color-form" class="form1" action="{% url 'appearance' %}" method="POST">
+                      {% csrf_token %}
+    
+                      <input type="hidden" name="form_type" value="colorform">
+    
+                      <div class="col-md-2 theme-color-picker">
+                        <!-- <label for="exampleColorInput" class="form-label">Color picker</label> -->
+                        <input type="color" id="primary_color" name="primary_color" class="form-control form-control-color" value="{{ user.userprofile.primary_color }}" title="Choose primary color">
+                      </div>
+                  
+                      
+                      <p id="primaryColor">{{user.userprofile.primary_color}}</p>
+                      
+
+                      <div class="form-submit-btns">
+                        <button type="submit" class="btn btn-light" id="primary_color_btn">Save primary_color</button>
+                      </div>
+    
+                      <!-- <div class="col-md-10 theme-form-label djids">
+                        <label for="inputPassword4" class="form-label">First preview</label>
+                        <div id="color-preview" class="form-control"></div>
+                      </div> -->
+    
+                    </form>
+                  </div>
+                </div>
+
+                <h4>Secondary color</h4>
+                <div class="recipe-form-container mb-3 theme-container" id="color-preview-form2">
+                  <div class="theme-form-wrapper" >
+                    <form class="row m-1" id="color-form2" action="{% url 'appearance' %}" method="POST">
+                      {% csrf_token %}
+    
+                      <input type="hidden" name="form_type" value="colorform2">
+    
+                      <div class="col-md-2 theme-color-picker">
+                        <!-- <label for="exampleColorInput" class="form-label">Color picker</label> -->
+                        <input type="color" id="secondary_color" name="secondary_color" class="form-control form-control-color" value="{{ user.userprofile.secondary_color }}" title="Choose secondary color">
+                      </div>
+
+                      
+                      <p id="secondaryColor">{{user.userprofile.secondary_color}}</p>
+                      
+    
+                      <!-- <div class="col-md-10">
+                        <label for="inputPassword4" class="form-label">First preview</label>
+                        <div id="color-preview2" class="form-control" style="width: 100%; height: 100%; border: 1px solid black;"></div>
+                      </div> -->
+                      
+                      <div class="form-submit-btns">
+                        <button type="submit" name="form2_submit" class="btn btn-light" id="secondary_color_btn">Save secondary_color</button>
+                      </div>
+                      
+                    </form>
+                  </div>
+                </div>
+
+                <h4>Tertiary color</h4>
+                <div class="recipe-form-container mb-3 theme-container" id="color-preview-form3">
+                  <div class="theme-form-wrapper" >
+                    <form class="row m-1" id="color-form3" action="{% url 'appearance' %}" method="POST">
+                      {% csrf_token %}
+    
+                      <input type="hidden" name="form_type" value="colorform3">
+    
+                      <div class="col-md-2 theme-color-picker">
+                        <!-- <label for="exampleColorInput" class="form-label">Color picker</label> -->
+                        <input type="color" id="tertiary_color" name="tertiary_color" class="form-control form-control-color" value="{{ user.userprofile.tertiary_color }}" title="Choose tertiary color">
+                      </div>
+    
+                      <p id="tertiaryColor">{{user.userprofile.tertiary_color}}</p>
+                      
+                      <div class="form-submit-btns">
+                        <button type="submit" name="form2_submit" class="btn btn-light" id="tertiary_color_btn">Save tertiary_color</button>
+                      </div>
+                      
+                    </form>
+                  </div>
+                </div>
+              
+                <h4>Link color</h4>
+                <div class="recipe-form-container mb-3 theme-container" id="color-preview-form4">
+                  <div class="theme-form-wrapper">
+                    <form class="row m-1" id="color-form4" action="{% url 'appearance' %}" method="POST">
+                      {% csrf_token %}
+    
+                      <input type="hidden" name="form_type" value="colorform4">
+    
+                      <div class="col-md-2 theme-color-picker">
+                        <!-- <label for="exampleColorInput" class="form-label">Color picker</label> -->
+                        <input type="color" id="active_link_color" name="active_link_color" class="form-control form-control-color" value="{{ user.userprofile.active_link_color }}" title="Choose active link color">
+                      </div>
+    
+                      <p id="activelinkColor">{{user.userprofile.active_link_color}}</p>
+                      
+                      <div class="form-submit-btns">
+                        <button type="submit" name="form2_submit" class="btn btn-light" id="activelink_color_btn">Save active_link_color</button>
+                      </div>
+                      
+                    </form>
+                  </div>
+                </div>
+              
+                <h4>Hover color</h4>
+                <div class="recipe-form-container mb-1 theme-container" id="color-preview-form5">
+                  <div class="theme-form-wrapper" >
+                    <form class="row m-1" id="color-form5" action="{% url 'appearance' %}" method="POST">
+                      {% csrf_token %}
+    
+                      <input type="hidden" name="form_type" value="colorform5">
+    
+                      <div class="col-md-2 theme-color-picker">
+                        <!-- <label for="exampleColorInput" class="form-label">Color picker</label> -->
+                        <input type="color" id="hover_color" name="hover_color" class="form-control form-control-color" value="{{ user.userprofile.hover_color }}" title="Choose hover color">
+                      </div>
+    
+                      <p id="hoverColor">{{user.userprofile.hover_color}}</p>
+                      
+                      <div class="form-submit-btns">
+                        <button type="submit" name="form2_submit" class="btn btn-light" id="hover_color_btn">Save hover_color</button>
+                      </div>
+                      
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+
+            {% endif %}
+
+          
+
+
+            <br>
+            {% if user.userprofile.theme == 'Dark theme' %}
+            <div class="reset-color-btn">
+              <button type="button" id="reset-colors2">Reset to default</button> 
+            </div>
+
+            {% elif user.userprofile.theme == 'Light theme' %}
+            <div class="reset-color-btn">
+              <button type="button" id="reset-colors">Reset all</button> 
+            </div>
+
+            {% else %}
+            <div class="reset-color-btn">
+              <button type="button" id="reset-colors">Reset</button> 
+            </div>
+            
+            {% endif %}
+
+          </div>
+
+        </main>
+
+        <aside class="sidebar theme-sidebar">
+                    
+          <div class="sidebar-recipes theme-sidebar">
+            <div class="sidebar-header theme-sidebar-header" id="sidebar-header">
+                <h1 id="sidebar-heading-h1">Default color palettes</h1>
+            </div>
+
+            {% if user.userprofile.theme == 'Dark theme' %}
+              
+              <p id="sidebar-subheading">Dark colors</p>
+
+              <div class="dynamic-card-container side-recipes-card-container theme-sidebar-container">
+              
+                <div class="sidebar-dcp-form-container">
+                  <h5>Rocks</h5>
+                  <form class="dcp-forms dcp-form1" id="darkcolorpaletteform1" action="{% url 'dcp_1' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="container dcp-form-container dark-dcp-container1">
+                      <div class="row dcp-rows">
+
+                        <input type="hidden" name="dcp_form_type" value="darkcolorform1">
+
+
+                        <div class="col color1">
+                          <input type="color" id="dcp_primary_color6" name="dcp_primary_color6" value="#191919" readonly>
+                        </div>
+
+                        <div class="col color2">
+                          <input type="color" id="dcp_secondary_color6" name="dcp_secondary_color6" value="#413F42" readonly>
+                        </div>
+
+                        <div class="col color3">
+                          <input type="color" id="dcp_tertiary_color6" name="dcp_tertiary_color6" value="#EEEEEE" readonly>
+                        </div>
+
+                        <div class="col color4">
+                          <input type="color" id="dcp_activelink_color6" name="dcp_activelink_color6" value="#03506F" readonly>
+                        </div>
+
+                        <div class="col color5">
+                          <input type="color" id="dcp_hover_color6" name="dcp_hover_color6" value="#686D76" readonly>
+                        </div>
+
+                        <button type="submit" class="btn btn-light" id="dcp_submit-btn1">Apply</button>
+                        
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+              </div>
+              
+            {% else %}
+            
+              <p id="sidebar-subheading">Pastel colors</p>
+
+              <div class="dynamic-card-containe side-recipes-card-container theme-sidebar-container">
+                
+                <div class="sidebar-dcp-form-container">
+                  <h5 class="themetext">Caroon</h5>
+                  <form class="dcp-forms dcp-form1" id="colorpaletteform1" action="{% url 'dcp_1' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="container dcp-form-container dcp-container1">
+                      <div class="row dcp-rows">
+
+                        <input type="hidden" name="dcp_form_type" value="dcpcolorform1">
+
+                        <div class="col color1">
+                          <input type="color" id="dcp_primary_color" name="dcp_primary_color" value="#CCD4BF" readonly>
+                        </div>
+
+                        <div class="col color2">
+                          <input type="color" id="dcp_secondary_color" name="dcp_secondary_color" value="#F5F3E7" readonly>
+                        </div>
+
+                        <div class="col color3">
+                          <input type="color" id="dcp_tertiary_color" name="dcp_tertiary_color" value="#243706" readonly>
+                        </div>
+
+                        <div class="col color4">
+                          <input type="color" id="dcp_activelink_color" name="dcp_activelink_color" value="#B5C99A" readonly>
+                        </div>
+
+                        <div class="col color5">
+                          <input type="color" id="dcp_hover_color" name="dcp_hover_color" value="#7C9070" readonly>
+                        </div>
+
+                        <button type="submit" class="btn btn-light themetext" id="dcp_submit-btn1">Apply</button>
+                        
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="sidebar-dcp-form-container">
+                  <h5 class="themetext">Fall</h5>
+                  <form class="dcp-forms dcp-form2" id="colorpaletteform2" action="{% url 'dcp_1' %}" method="POST">
+                    {% csrf_token %}
+                    
+                    <input type="hidden" name="dcp_form_type" value="dcpcolorform2">
+
+                      <div class="container dcp-form-container dcp-container2">
+                      <div class="row dcp-rows">
+
+                        <div class="col color1">
+                          <input type="color" id="dcp_primary_color2" name="dcp_primary_color2" value="#C2B9B0" readonly>
+                        </div>
+
+                        <div class="col color2">
+                          <input type="color" id="dcp_secondary_color2" name="dcp_secondary_color2" value="#F2F2F2" readonly>
+                        </div>
+
+                        <div class="col color3">
+                          <input type="color" id="dcp_tertiary_color2" name="dcp_tertiary_color2" value="#1A120B" readonly>
+                        </div>
+
+                        <div class="col color4">
+                          <input type="color" id="dcp_activelink_color2" name="dcp_activelink_color2" value="#B19F9E" readonly>
+                        </div>
+
+                        <div class="col color5">
+                          <input type="color" id="dcp_hover_color2" name="dcp_hover_color2" value="#8E8268" readonly>
+                        </div>
+
+                        <button type="submit" class="btn btn-light themetext" id="dcp_submit-btn2">Apply</button>
+                        
+                      </div>
+                    </div>
+
+                  </form>
+                </div>
+
+                <div class="sidebar-dcp-form-container">
+                  <h5 class="themetext">Natural</h5>
+                  <form class="dcp-forms dcp-form3" id="colorpaletteform3" action="{% url 'dcp_1' %}" method="POST">
+                    {% csrf_token %}
+                    
+                    <input type="hidden" name="dcp_form_type" value="dcpcolorform3">
+
+                      <div class="container dcp-form-container dcp-container3">
+                      <div class="row dcp-rows">
+
+                        <div class="col color1">
+                          <input type="color" id="dcp_primary_color3" name="dcp_primary_color3" value="#CDCAC5" readonly>
+                        </div>
+
+                        <div class="col color2">
+                          <input type="color" id="dcp_secondary_color3" name="dcp_secondary_color3" value="#EFECE7" readonly>
+                        </div>
+
+                        <div class="col color3">
+                          <input type="color" id="dcp_tertiary_color3" name="dcp_tertiary_color3" value="#001C30" readonly>
+                        </div>
+
+                        <div class="col color4">
+                          <input type="color" id="dcp_activelink_color3" name="dcp_activelink_color3" value="#A38970" readonly>
+                        </div>
+
+                        <div class="col color5">
+                          <input type="color" id="dcp_hover_color3" name="dcp_hover_color3" value="#9fb1c6" readonly>
+                        </div>
+
+                        <button type="submit" class="btn btn-light themetext" id="dcp_submit-btn3">Apply</button>
+                        
+                      </div>
+                    </div>
+
+                  </form>
+                </div>
+
+                <div class="sidebar-dcp-form-container">
+                  <h5 class="themetext">Linen</h5>
+                  <form class="dcp-forms dcp-form4" id="colorpaletteform4" action="{% url 'dcp_1' %}" method="POST">
+                    {% csrf_token %}
+                    
+                    <input type="hidden" name="dcp_form_type" value="dcpcolorform4">
+
+                      <div class="container dcp-form-container dcp-container4">
+                      <div class="row dcp-rows">
+                        
+                        <div class="col color1">
+                          <input type="color" id="dcp_primary_color4" name="dcp_primary_color4" value="#CFD2CF" readonly>
+                        </div>                
+
+                        <div class="col color2">
+                          <input type="color" id="dcp_secondary_color4" name="dcp_secondary_color4" value="#e9e5e3" readonly>
+                        </div>
+
+                        <div class="col color3">
+                          <input type="color" id="dcp_tertiary_color4" name="dcp_tertiary_color4" value="#282f2f" readonly>
+                        </div>
+
+                        <div class="col color4">
+                          <input type="color" id="dcp_activelink_color4" name="dcp_activelink_color4" value="#877a79" readonly>
+                        </div>
+
+                        <div class="col color5">
+                          <input type="color" id="dcp_hover_color4" name="dcp_hover_color4" value="#d7cdc4" readonly>
+                        </div>
+
+                        <button type="submit" class="btn btn-light themetext" id="dcp_submit-btn4">Apply</button>
+                        
+                      </div>
+                    </div>
+
+                  </form>
+                </div>
+
+              </div>
+
+                
+
+            {% endif %}
+          
+          </div>
+          
+        </aside>
+
+      </div>
+
+    </div>
+
+    {% include 'testingapp/footer.html' %}
+
+  </div>
+    
+
+
+
+{% else %}  <!-- User is unauthenticated then redirect to login page-->
+
+{% endif %}
+</body>
+
+            <!-- Preview colors -->
+            <script>
+              $(document).ready(function() {
+                // Update color preview when input value changes
+                $("#primary_color").change(function() {
+                  var color = $(this).val();
+                  $("#color-preview-form1").css("background-color", color);
+                });
+              });
+            </script>
+
+            <script>
+              $(document).ready(function() {
+                // Update color preview when input value changes
+                $("#secondary_color").change(function() {
+                  var color = $(this).val();
+                  $("#color-preview-form2").css("background-color", color);
+                });
+              });
+            </script>
+
+            <script>
+              $(document).ready(function() {
+                // Update color preview when input value changes
+                $("#tertiary_color").change(function() {
+                  var color = $(this).val();
+                  $("#color-preview-form3").css("background-color", color);
+                });
+              });
+            </script>
+
+            <script>
+              $(document).ready(function() {
+                // Update color preview when input value changes
+                $("#active_link_color").change(function() {
+                  var color = $(this).val();
+                  $("#color-preview-form4").css("background-color", color);
+                });
+              });
+            </script>
+
+            <script>
+              $(document).ready(function() {
+                // Update color preview when input value changes
+                $("#hover_color").change(function() {
+                  var color = $(this).val();
+                  $("#color-preview-form5").css("background-color", color);
+                });
+              });
+            </script>
+
+
+            <!-- submitting forms using AJAX -->
+        
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+              $(document).ready(function() {
+                
+                $('#primary_color').change(function(event) {
+                  const selectedColor = event.target.value;
+                  $('#primaryColor').text(selectedColor);
+                });
+
+                const newColor = $('#primary_color').val();
+                    $('#primary_color').attr('value', newColor);
+
+                  $('#color-form').on('submit', function(e) {
+                      e.preventDefault(); // prevent the form from submitting normally
+                      $.ajax({
+                          type: 'POST',
+                          url: '{% url "appearance" %}', // replace with your view URL
+                          data: $(this).serialize(),
+                          success: function(response) {
+                              // handle success response, if any
+                          },
+                          error: function(xhr, status, error) {
+                              // handle error response, if any
+                          }
+                      });
+                  });
+              });
+            </script>
+
+            <script>
+              $(document).ready(function() {
+
+                $('#secondary_color').change(function(event) {
+                  const selectedColor = event.target.value;
+                  $('#secondaryColor').text(selectedColor);
+                });
+
+                  $('#color-form2').on('submit', function(e) {
+                      e.preventDefault(); // prevent the form from submitting normally
+                      $.ajax({
+                          type: 'POST',
+                          url: '{% url "appearance" %}', // replace with your view URL
+                          data: $(this).serialize(),
+                          success: function(response) {
+                              // handle success response, if any
+                          },
+                          error: function(xhr, status, error) {
+                              // handle error response, if any
+                          }
+                      });
+                  });
+              });
+            </script>
+
+            <script>
+              $(document).ready(function() {
+
+                $('#tertiary_color').change(function(event) {
+                  const selectedColor = event.target.value;
+                  $('#tertiaryColor').text(selectedColor);
+                });
+
+                  $('#color-form3').on('submit', function(e) {
+                      e.preventDefault(); // prevent the form from submitting normally
+
+                      const formData = $(this).serialize();
+                      
+                      $.ajax({
+                          type: 'POST',
+                          url: '{% url "appearance" %}', // replace with your view URL
+                          data: formData,
+                          success: function(response) {
+                            $('#displayColor').text(response.color);
+                              // handle success response, if any
+                          }
+                      });
+                  });
+              });
+            </script>
+
+            <script>
+              $(document).ready(function() {
+
+                $('#active_link_color').change(function(event) {
+                  const selectedColor = event.target.value;
+                  $('#activelinkColor').text(selectedColor);
+                });
+
+                  $('#color-form4').on('submit', function(e) {
+                      e.preventDefault(); // prevent the form from submitting normally
+                      $.ajax({
+                          type: 'POST',
+                          url: '{% url "appearance" %}', // replace with your view URL
+                          data: $(this).serialize(),
+                          success: function(response) {
+                              // handle success response, if any
+                          },
+                          error: function(xhr, status, error) {
+                              // handle error response, if any
+                          }
+                      });
+                  });
+              });
+            </script>
+
+            <script>
+              $(document).ready(function() {
+
+                $('#hover_color').change(function(event) {
+                  const selectedColor = event.target.value;
+                  $('#hoverColor').text(selectedColor);
+                });
+
+                  $('#color-form5').on('submit', function(e) {
+                      e.preventDefault(); // prevent the form from submitting normally
+                      $.ajax({
+                          type: 'POST',
+                          url: '{% url "appearance" %}', // replace with your view URL
+                          data: $(this).serialize(),
+                          success: function(response) {
+                            window.location.reload();
+                              // handle success response, if any
+                          },
+                          error: function(xhr, status, error) {
+                              // handle error response, if any
+                          }
+                      });
+                  });
+              });
+            </script>
+
+
+            <!-- Default color palettes forms submittin using AJAX -->
+            <script>
+
+              // form 1
+              $(document).ready(function() {
+
+                $('#colorpaletteform1').on('submit', function(e) {
+                    e.preventDefault(); 
+
+                    // Get form data
+                    const primary_color = $('#dcp_primary_color').val();
+                    $('#primary_color').attr('value', primary_color);
+
+                    const secondary_color = $('#dcp_secondary_color').val();
+                    $('#secondary_color').attr('value', secondary_color);
+
+                    const tertiary_color = $('#dcp_tertiary_color').val();
+                    $('#tertiary_color').attr('value', tertiary_color);
+
+                    const activelink_color = $('#dcp_activelink_color').val();
+                    $('#active_link_color').attr('value', activelink_color);
+
+                    const hover_color = $('#dcp_hover_color').val();
+                    $('#hover_color').attr('value', hover_color);
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "dcp_1" %}', 
+                        data: $(this).serialize(),
+                        success: function(response) {
+                            // handle success response, if any
+                            $('#primaryColor').text(response.dcpprimary_color);
+                            $('#secondaryColor').text(response.dcpsecondary_color);
+                            $('#tertiaryColor').text(response.dcptertiary_color);
+                            $('#activelinkColor').text(response.dcpactivelink_color);
+                            $('#hoverColor').text(response.dcphover_color);
+
+                        },
+                        error: function(xhr, status, error) {
+                            // handle error response, if any
+                        }
+                    });
+                });
+              });
+
+              
+              // form2
+              $(document).ready(function() {
+
+                $('#colorpaletteform2').on('submit', function(e) {
+                    e.preventDefault(); 
+
+                    // Get form data
+                    const primary_color2 = $('#dcp_primary_color2').val();
+                    $('#primary_color').attr('value', primary_color2);
+
+                    const secondary_color2 = $('#dcp_secondary_color2').val();
+                    $('#secondary_color').attr('value', secondary_color2);
+
+                    const tertiary_color2 = $('#dcp_tertiary_color2').val();
+                    $('#tertiary_color').attr('value', tertiary_color2);
+
+                    const activelink_color2 = $('#dcp_activelink_color2').val();
+                    $('#active_link_color').attr('value', activelink_color2);
+
+                    const hover_color2 = $('#dcp_hover_color2').val();
+                    $('#hover_color').attr('value', hover_color2);
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "dcp_1" %}', 
+                        data: $(this).serialize(),
+                        success: function(response) {
+                            // handle success response, if any
+                            $('#primaryColor').text(response.dcpprimary_color2);
+                            $('#secondaryColor').text(response.dcpsecondary_color2);
+                            $('#tertiaryColor').text(response.dcptertiary_color2);
+                            $('#activelinkColor').text(response.dcpactivelink_color2);
+                            $('#hoverColor').text(response.dcphover_color2);
+
+                        },
+                        error: function(xhr, status, error) {
+                            // handle error response, if any
+                        }
+                    });
+                });
+                });
+
+
+              // form3
+              $(document).ready(function() {
+
+                $('#colorpaletteform3').on('submit', function(e) {
+                    e.preventDefault(); 
+
+                    // Get form data
+                    const primary_color3 = $('#dcp_primary_color3').val();
+                    $('#primary_color').attr('value', primary_color3);
+
+                    const secondary_color3 = $('#dcp_secondary_color3').val();
+                    $('#secondary_color').attr('value', secondary_color3);
+
+                    const tertiary_color3 = $('#dcp_tertiary_color3').val();
+                    $('#tertiary_color').attr('value', tertiary_color3);
+
+                    const activelink_color3 = $('#dcp_activelink_color3').val();
+                    $('#active_link_color').attr('value', activelink_color3);
+
+                    const hover_color3 = $('#dcp_hover_color3').val();
+                    $('#hover_color').attr('value', hover_color3);
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "dcp_1" %}', 
+                        data: $(this).serialize(),
+                        success: function(response) {
+                            // handle success response, if any
+                            $('#primaryColor').text(response.dcpprimary_color3);
+                            $('#secondaryColor').text(response.dcpsecondary_color3);
+                            $('#tertiaryColor').text(response.dcptertiary_color3);
+                            $('#activelinkColor').text(response.dcpactivelink_color3);
+                            $('#hoverColor').text(response.dcphover_color3);
+
+                        },
+                        error: function(xhr, status, error) {
+                            // handle error response, if any
+                        }
+                    });
+                });
+                });
+            
+
+              // form4
+              $(document).ready(function() {
+
+              $('#colorpaletteform4').on('submit', function(e) {
+                  e.preventDefault(); 
+
+                  // Get form data
+                  const primary_color4 = $('#dcp_primary_color4').val();
+                  $('#primary_color').attr('value', primary_color4);
+
+                  const secondary_color4 = $('#dcp_secondary_color4').val();
+                  $('#secondary_color').attr('value', secondary_color4);
+
+                  const tertiary_color4 = $('#dcp_tertiary_color4').val();
+                  $('#tertiary_color').attr('value', tertiary_color4);
+
+                  const activelink_color4 = $('#dcp_activelink_color4').val();
+                  $('#active_link_color').attr('value', activelink_color4);
+
+                  const hover_color4 = $('#dcp_hover_color4').val();
+                  $('#hover_color').attr('value', hover_color4);
+                  
+                  $.ajax({
+                      type: 'POST',
+                      url: '{% url "dcp_1" %}', 
+                      data: $(this).serialize(),
+                      success: function(response) {
+                          // handle success response, if any
+                          $('#primaryColor').text(response.dcpprimary_color4);
+                          $('#secondaryColor').text(response.dcpsecondary_color4);
+                          $('#tertiaryColor').text(response.dcptertiary_color4);
+                          $('#activelinkColor').text(response.dcpactivelink_color4);
+                          $('#hoverColor').text(response.dcphover_color4);
+
+                      },
+                      error: function(xhr, status, error) {
+                          // handle error response, if any
+                      }
+                  });
+              });
+              });
+            
+
+
+              // dark color form 1
+              $(document).ready(function() {
+
+$('#darkcolorpaletteform1').on('submit', function(e) {
+    e.preventDefault(); 
+
+    // Get form data
+    const primary_color4 = $('#dcp_primary_color4').val();
+    $('#primary_color').attr('value', primary_color4);
+
+    const secondary_color4 = $('#dcp_secondary_color4').val();
+    $('#secondary_color').attr('value', secondary_color4);
+
+    const tertiary_color4 = $('#dcp_tertiary_color4').val();
+    $('#tertiary_color').attr('value', tertiary_color4);
+
+    const activelink_color4 = $('#dcp_activelink_color4').val();
+    $('#active_link_color').attr('value', activelink_color4);
+
+    const hover_color4 = $('#dcp_hover_color4').val();
+    $('#hover_color').attr('value', hover_color4);
+    
+    $.ajax({
+        type: 'POST',
+        url: '{% url "dcp_1" %}', 
+        data: $(this).serialize(),
+        success: function(response) {
+            // handle success response, if any
+            $('#primaryColor').text(response.dcpprimary_color4);
+            $('#secondaryColor').text(response.dcpsecondary_color4);
+            $('#tertiaryColor').text(response.dcptertiary_color4);
+            $('#activelinkColor').text(response.dcpactivelink_color4);
+            $('#hoverColor').text(response.dcphover_color4);
+
+        },
+        error: function(xhr, status, error) {
+            // handle error response, if any
+        }
+    });
+});
+});
+            
+            </script>
+
+
+
+          <!-- form submit buttons colors -->
+          <script>
+            $(document).ready(function() {
+                $('#primary_color_btn').on('submit', function(e) {
+                    e.preventDefault(); // prevent the form from submitting normally
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "appearance" %}', // replace with your view URL
+                        data: $(this).serialize(),
+                        success: function(response) {
+                            // handle success response, if any
+                        },
+                        error: function(xhr, status, error) {
+                            // handle error response, if any
+                        }
+                    });
+                });
+            });
+
+            $(document).ready(function() {
+                $('#secondary_color_btn').on('submit', function(e) {
+                    e.preventDefault(); // prevent the form from submitting normally
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "appearance" %}', // replace with your view URL
+                        data: $(this).serialize(),
+                        success: function(response) {
+                            // handle success response, if any
+                        },
+                        error: function(xhr, status, error) {
+                            // handle error response, if any
+                        }
+                    });
+                });
+            });
+
+            $(document).ready(function() {
+                $('#tertiary_color_btn').on('submit', function(e) {
+                    e.preventDefault(); // prevent the form from submitting normally
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "appearance" %}', // replace with your view URL
+                        data: $(this).serialize(),
+                        success: function(response) {
+                            // handle success response, if any
+                        },
+                        error: function(xhr, status, error) {
+                            // handle error response, if any
+                        }
+                    });
+                });
+            });
+
+            $(document).ready(function() {
+                $('#activelink_color_btn').on('submit', function(e) {
+                    e.preventDefault(); // prevent the form from submitting normally
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "appearance" %}', // replace with your view URL
+                        data: $(this).serialize(),
+                        success: function(response) {
+                            // handle success response, if any
+                        },
+                        error: function(xhr, status, error) {
+                            // handle error response, if any
+                        }
+                    });
+                });
+            });
+
+            $(document).ready(function() {
+                $('#hover_color_btn').on('submit', function(e) {
+                    e.preventDefault(); // prevent the form from submitting normally
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "appearance" %}', // replace with your view URL
+                        data: $(this).serialize(),
+                        success: function(response) {
+                            // handle success response, if any
+                        },
+                        error: function(xhr, status, error) {
+                            // handle error response, if any
+                        }
+                    });
+                });
+            });
+          </script>
+
+
+          <!-- Resetting all forms at once -->
+          <script>
+            $(document).ready(function() {
+              $("#reset-colors").click(function() {
+                $.ajax({
+                  url: "{% url 'reset_colors' %}",
+                  method: "GET",
+                  success: function() {
+                    window.location.reload();
+                  }
+                });
+              });
+            });
+
+            $(document).ready(function() {
+              $("#reset-colors2").click(function() {
+                $.ajax({
+                  url: "{% url 'reset_dark' %}",
+                  method: "GET",
+                  success: function() {
+                    window.location.reload();
+                  }
+                });
+              });
+            });
+          </script>
+
+<!-- exteranal dark theme form submit button -->
+<script>
+  const externalButton = document.querySelector('#externalButton');
+  const myForm = document.querySelector('#myForm');
+
+  externalButton.addEventListener('click', function() {
+    myForm.submit();
+  });
+</script>
+
+<!-- tab switcher -->
+<script>
+  function recipes(evt, type) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    
+      if (type === 'dark_theme') {
+      document.getElementById("replacement_div").style.display = "block";
+      // document.getElementById("additionalButton").style.display = "none";
+
+    }
+    
+    else if (type === 'light_theme'){
+      document.getElementById("light_aside").style.display = "block";
+      // document.getElementById("additionalButton").style.display = "block";
+    } 
+    else {
+      document.getElementById(type).style.display = "block";
+      // document.getElementById("additionalButton").style.display = "none";
+
+    }
+
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(type).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+    document.getElementById("defaultOpen").click();
+
+</script>
+
+{% endblock %}	

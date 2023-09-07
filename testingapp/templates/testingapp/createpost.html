@@ -1,0 +1,512 @@
+{% extends 'testingapp/newnavbar_navrail.html' %}
+
+{% load hitcount_tags %}
+
+{% load static %}
+
+
+{% block css %}
+{% endblock %}
+
+{% block weather_widget %}
+{% endblock %}
+
+{% block sm_weather %}
+{% endblock %}
+
+{% block title %}
+<title>New recipe</title>
+{% endblock %}
+
+
+{% block content%}
+
+<body>
+
+{% if user.is_authenticated %}
+
+  <div class="primary-wrapper">
+
+    <div class="secondary-wrapper">
+
+      <div class="container container-flex container-flex-2">
+
+        <main role="main" class="container-main">
+
+          <div class="dynamic-recipes dynamic-header tertiary-wrapper">
+                   
+            <h1><button class="btn btn-light back-btn" onclick="history.back()"><span class="material-symbols-rounded back-btn-icon">arrow_back</span></button> 
+              Create new recipe
+            </h1>
+
+            <p class="sub-heading">Share your favorite recipe with others</p>
+
+            {% if messages %}
+
+              {% for message in messages %}
+                <p class="alert alert-danger mx-auto"> {{message}}</p>
+              {% endfor %}
+
+            {% endif %}
+
+            <div class="recipe-form-container main-recipe-form">
+
+              <form class="row m-1 g-4 create-recipe-form" method="POST" id="myForm" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="col-lg-12 image-field">
+                  <label for="inputTitle" class="form-label">Cover image</label>
+                  <br>
+                  <label for="images" name="image" class="border form-label img-input-btn">
+                    <span class="material-symbols-rounded upload-img-icon">upload</span> <span class="preview-counter">Select images</span>
+                  </label>
+                  <div class="col-sm-11 input-field">
+                    <input class="form-control image-input" type="file" id="images" name="image" accept="image/png, image/gif, image/jpeg, image/webp" multiple required="required">
+                  </div>
+                </div>
+
+                <script>
+                </script>
+
+                <!-- Image preview -->
+                <div class="imgarea">
+                  <!-- <div class="testpreview"></div> -->
+                  <div class="new-container"></div>
+                </div>
+                
+
+                <div class="col-12 first-div">
+                  <label for="inputTitle" class="form-label">Title</label>
+                  <div class="col-sm-11 input-field">
+                    <input type="text" name="title" class="form-control" id="inputTitle" placeholder="Title of the recipe" required="required" data-bs-toggle="tooltip" data-bs-placement="bottom">
+                  </div>
+                  <span id="nameError"></span>
+                </div>
+
+      
+                <div class="row mx-0 gx-4 gy-2 select-options">
+
+                  <div class="col-md-4">
+                    <label for="inputTyoe" class="col col-form-label">Type of recipe</label>
+                    <select class="form-select" id="specificSizeSelect" name="type" required>
+                      <option value="">Type</option>
+                      <option value="Breakfast"> &#9749; Breakfast</option>
+                      <option value="Lunch">&#127790; Lunch</option>
+                      <option value="Evening Snack">&#127861; Evening Snack</option>
+                      <option value="Dinner">&#127858; Dinner</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="inputCuisine" class="col col-form-label">Cuisine</label>
+                    <select class="form-select" id="specificSizeSelect" name="cuisine" required>
+                      <option value="">Cuisine</option>
+                      <option value="Indian">&#127835; Indian Cuisine</option>
+                      <option value="American">&#127850; American Cuisine</option>
+                      <option value="Italian">&#127829; Italian Cuisine</option>
+                    </select>
+                  </div>
+                  
+                  <div class="col-md-3">
+                    <label for="inputTime" class="col col-form-label">Preparation time</label>
+                    <input type="number" class="form-control" name="timing" id="inputTime" min="0" placeholder="Time (in min)" required="required" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Preparation time">
+                  </div>
+
+                </div>
+                
+                <div class="row mx-0 gx-4 gy-2 select-options">
+                  
+                  <div class="col-md-4">
+                    <label for="inputCategory" class="col col-form-label">Category</label>
+                    <select class="form-select" id="specificSizeSelect" name="category" required>
+                      <option value="">Category</option>
+                      <option value="Veg">&#128994; Veg</option>
+                      <option value="Non veg">&#128308; Non veg</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="inputDifficulty" class="col col-form-label">Difficulty</label>
+                    <select class="form-select" id="specificSizeSelect" name="difficulty" required>
+                      <option value="">Difficulty</option>
+                      <option value="Easy">Easy</option>
+                      <option value="Medium">Medium</option>
+                      <option value="Hard">Hard</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-3">
+                    <label for="inputServings" class="col col-form-label">Servings</label>
+                    <input type="number" name="servings" class="form-control" id="inputServings" min="0" placeholder="Serves" required="required" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Serves">
+                  </div>
+
+                </div>
+
+                <div class="col-12">
+                  <label for="inputIngredients" class="form-label">Ingredients</label>
+                  <div class="col-sm-11 input-field">
+                    <textarea class="form-control" name="ingredients" id="inputIngredients" placeholder="Ingredients" rows="6" required="required">1. </textarea>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <label for="inputRecipe" class="form-label">Main recipe</label>
+                  <div class="col-sm-11 input-field">
+                    <textarea class="form-control" name="content" id="id_content" placeholder="Instructions for the recipe" rows="10" cols="" required="required"> </textarea>
+                    
+                    {{form.media}}
+                  </div>
+
+                <div class="recipe-instruction-text mt-2">Enter recipe instructions in a numeric list format <b>(e.g. 1. Preheat the oven...)</b></div>
+
+                </div> 
+
+                
+                
+                <div class="text-center">
+                  <div class="form-btns">
+                    <button type="submit" class="btn btn-transparent" onclick="validateForm()"><span>Post</span></button>
+                    
+                    <button type="reset" class="btn btn-transparent" onclick="removeimg()"><span>Clear</span></button>
+                    
+                  </div>
+                </div>
+
+              </form>
+              
+              <div style="display: none;">
+              {{form.as_p}}
+              </div>
+
+            </div>
+            
+          </div>
+
+        </main>
+
+        <aside class="sidebar sidebar-dashboard recipe-img-preview-sidebar">
+                    
+          <div class="sidebar-recipes">
+              
+            <h2>Image preview</h2>
+
+              <!-- <div class="preview"></div> -->
+
+              <!-- Image preview -->
+              <div class="preview-container"></div>
+               
+          </div>
+
+        </aside>
+
+      </div>
+
+    </div>
+
+    {% include 'testingapp/footer.html' %}
+
+  </div>
+
+{% else %} 
+  
+<script>
+  location.href = "{% url 'login' %}";
+</script>
+
+{% endif %}
+</body>
+
+
+
+
+<script>
+function validateForm() {
+  // Get the form element
+  const form = document.getElementById('myForm');
+
+  // Iterate through each input element in the form
+  for (const input of form.elements) {
+    // Check if the input is required and its value is empty
+    if (input.required && input.value.trim() === '') {
+      // Alert the user and prevent the form from submitting
+      alert(`${input.name} is required`);
+      return false;
+    }
+  }
+}
+</script>
+
+<script>
+  function formsubmit() 
+  {
+    var image = document.forms["myForm"]["image"].value;
+    var timing = document.forms["myForm"]["timing"].value;
+    var servings = document.forms["myForm"]["servings"].value;
+    var type = document.getElementById("inputGroupSelect01").value;
+    var cuisine = document.forms["myForm"]["cuisine"].value;
+    var category = document.forms["myForm"]["category"].value;
+    var title = document.forms["myForm"]["title"].value;
+    var ingredients = document.forms["myForm"]["ingredients"].value;
+    var content = document.forms["myForm"]["content"].value;
+    if (image == "")
+    {
+      alert("Please choose a image")
+      return false;
+    }
+    else if (timing == "") 
+    {
+      alert("Please provide preparation time");
+      return false;
+    }
+    else if (servings == "") 
+    {
+      alert("Please provide number of serving");
+      return false;
+    }
+    else if (type == "") 
+    {
+      alert("Please select type from list");
+      return false;
+    }
+    else if (cuisine == "") 
+    {
+      alert("Please select cuisine");
+      return false;
+    }
+    else if (category == "") 
+    {
+      alert("Please select category");
+      return false;
+    }
+    else if (difficulty == "") 
+    {
+      alert("Please select difficulty");
+      return false;
+    }
+    else if (title == "") 
+    {
+      alert("Title field cannot be empty");
+      return false;
+    }
+    else if (ingredients == "")
+    {
+      alert("Ingredient field cannot be empty");
+      return false;
+    }
+    else if (content == "")
+    {
+      alert("Recipe field cannot be empty");
+      return false;
+    }  
+    alert("Your recipe has been posted suceesfully 😊");
+    // location.href = "{% url 'home' %}";
+  }
+
+  // Form reset
+  function myFunction() {
+document.getElementById("output").reset();
+}
+
+</script>
+
+<!-- image preview with name of the file below image button on small screen -->
+<script>
+  // Get the file input element
+  const imagesInputs = document.getElementById('images');
+  // Get the preview container element
+  const previewContainers = document.querySelector('.new-container');
+
+  // Listen for file input change event
+  imagesInputs.addEventListener('change', () => {
+    // Remove existing previews
+    previewContainers.innerHTML = '';
+
+    // Loop through selected files
+    for (const file of imagesInputs.files) {
+      // Create a FileReader object to read file data
+      const reader = new FileReader();
+
+      // Listen for FileReader load event
+      reader.addEventListener('load', () => {
+        // Create an image element to display preview
+        const image = document.createElement('img');
+        image.classList.add('new-preview-image');
+        image.src = reader.result;
+
+        // Create a name element to display file name
+        const name = document.createElement('div');
+        name.classList.add('new-preview-name');
+        name.textContent = file.name;
+
+        // Create a preview container element to hold image and name
+        const preview = document.createElement('div');
+        preview.appendChild(image);
+        preview.appendChild(name);
+
+        // Add preview to preview container
+        previewContainers.appendChild(preview);
+      });
+
+      // Read file data as URL
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
+
+
+<!-- image preview with name of the file -->
+<script>
+  // Get the file input element
+  const imagesInput = document.getElementById('images');
+  // Get the preview container element
+  const previewContainer = document.querySelector('.preview-container');
+
+  const imgcounter = document.getElementById('counter');
+
+  // Get the file input element
+  const ttimagesInput = document.getElementById('images');
+  // Get the preview container element
+  const ttpreviewContainer = document.querySelector('.preview-counter');
+  
+  // Listen for file input change event
+  imagesInput.addEventListener('change', () => {
+    // Remove existing previews
+    previewContainer.innerHTML = '';
+
+    // Loop through selected files
+    for (const file of imagesInput.files) {
+      // Create a FileReader object to read file data
+      const reader = new FileReader();
+
+      // Listen for FileReader load event
+      reader.addEventListener('load', () => {
+        // Create an image element to display preview
+        const image = document.createElement('img');
+        image.classList.add('preview-image');
+        image.src = reader.result;
+
+        // Create a name element to display file name
+        const name = document.createElement('div');
+        name.classList.add('preview-name');
+        name.textContent = file.name;
+
+        // Create a preview container element to hold image and name
+        const preview = document.createElement('div');
+        preview.appendChild(image);
+        preview.appendChild(name);
+
+        // Add preview to preview container
+        previewContainer.appendChild(preview);
+        // Increment the counter and update the counter element
+        counterValue++;
+        imgcounter.textContent = counterValue;
+      });
+
+      // Read file data as URL
+      reader.readAsDataURL(file);
+    }
+  });
+
+  // Listen for file input change event
+  ttimagesInput.addEventListener('change', () => {
+    // Remove existing previews
+    ttpreviewContainer.innerHTML = '';
+
+    // Get the number of selected files
+    const numFiles = ttimagesInput.files.length;
+
+    // Display the appropriate message based on the number of selected files
+    if (numFiles === 1) {
+      // Create a counter element to display number of files
+      const counter = document.createElement('span');
+      counter.classList.add('preview-counter');
+      counter.textContent = `${numFiles} file selected`;
+
+      // Add counter to preview container
+      ttpreviewContainer.appendChild(counter);
+    } else {
+      // Create a counter element to display number of files
+      const counter = document.createElement('span');
+      counter.classList.add('preview-counter');
+      counter.textContent = `${numFiles} files selected`;
+
+      // Add counter to preview container
+      ttpreviewContainer.appendChild(counter);
+    }
+  });
+</script>
+
+
+<!-- increasing the counter inside textarea by pressing enter -->
+<script>
+  const textarea = document.getElementById('inputRecipe');
+  let counter = 2; // Initialize the counter to 2
+  let lastCounter = 1; // Initialize the last counter to 1
+  textarea.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      const value = this.value;
+      const selectionStart = this.selectionStart;
+      const selectionEnd = this.selectionEnd;
+      const beforeCursor = value.substring(0, selectionStart);
+      const afterCursor = value.substring(selectionEnd);
+      const newLine = `\n${counter}. `;
+      this.value = beforeCursor + newLine + afterCursor;
+      this.selectionStart = selectionEnd + newLine.length;
+      this.selectionEnd = selectionEnd + newLine.length;
+      lastCounter = counter; // Update the last counter to the current counter
+      counter++;
+    }
+  });
+
+  textarea.addEventListener('keyup', function(event) {
+    if (event.key === 'Backspace') {
+      const value = this.value;
+      const cursorPosition = this.selectionStart;
+      const lastCounterIndex = value.lastIndexOf('\n', cursorPosition - 2);
+      const lastCounterValue = parseInt(value.substring(lastCounterIndex + 1, cursorPosition - 2));
+      if (!isNaN(lastCounterValue)) {
+        lastCounter = lastCounterValue; // Update the last counter to the previous counter
+        counter = lastCounter + 1; // Reset the current counter to the next number after the previous counter
+      }
+    }
+  });
+</script>
+
+<!-- same above counter for ingredients -->
+<script>
+  const ingredientstextarea = document.getElementById('inputIngredients');
+  let newcounter = 2; // Initialize the counter to 2
+  let prevcounter = 1; // Initialize the last counter to 1
+  ingredientstextarea.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      const value = this.value;
+      const selectionStart = this.selectionStart;
+      const selectionEnd = this.selectionEnd;
+      const beforeCursor = value.substring(0, selectionStart);
+      const afterCursor = value.substring(selectionEnd);
+      const newLine = `\n${newcounter}. `;
+      this.value = beforeCursor + newLine + afterCursor;
+      this.selectionStart = selectionEnd + newLine.length;
+      this.selectionEnd = selectionEnd + newLine.length;
+      lastCounter = newcounter; // Update the last counter to the current counter
+      newcounter++;
+    }
+  });
+
+  ingredientstextarea.addEventListener('keyup', function(event) {
+    if (event.key === 'Backspace') {
+      const value = this.value;
+      const cursorPosition = this.selectionStart;
+      const lastCounterIndex = value.lastIndexOf('\n', cursorPosition - 2);
+      const lastCounterValue = parseInt(value.substring(lastCounterIndex + 1, cursorPosition - 2));
+      if (!isNaN(lastCounterValue)) {
+        prevcounter = lastCounterValue; // Update the last counter to the previous counter
+        newcounter = prevcounter + 1; // Reset the current counter to the next number after the previous counter
+      }
+    }
+  });
+</script>
+
+{% endblock %}
