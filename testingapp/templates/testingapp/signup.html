@@ -102,7 +102,39 @@
 
 </body>
 
+<!-- error message if user already exists -->
+{% if messages %}
+                                  
+  <div class="modal fade" id="messagesModal" tabindex="-1" aria-labelledby="messagesModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-search">
+      <div class="modal-content logoutmodal deletemodal messagemodal">
+          <div class="modal-header">
+              <h5 class="modal-title" id="messagesModalLabel">Error</h5>
+              <button type="button" class="btn btn-transparent modal-close-btn" data-bs-dismiss="modal" aria-label="Close"><span class="material-symbols-rounded md-top-closeicon">close</span></button>
+          </div>
+          
+          <div class="modal-body">
+          {% for message in messages %}
+          <div class="callout callout-warning">
+              <h5><span class="material-symbols-rounded warning-icon" id="warning-icon">warning</span> {{ message }}</h5>
+          </div>
+              
+          {% endfor %}
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-light footerbtn" data-bs-dismiss="modal">Close</button>
+          </div>
+      </div>
+      </div>
+  </div>
 
+  <script>
+      $(document).ready(function() {
+      $('#messagesModal').modal('show');
+      });
+  </script>
+
+{% endif %}
 
 <!-- Bootstrap Modal for Password Mismatch -->
 <div class="modal fade" id="passwordMismatchModal" tabindex="-1" role="dialog" aria-labelledby="passwordMismatchModalLabel" aria-hidden="true">
