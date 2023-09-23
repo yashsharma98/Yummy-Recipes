@@ -174,6 +174,9 @@
       const fnameInput = document.querySelector("input[name='fname']");
       const lnameInput = document.querySelector("input[name='lname']");
 
+      const password1Input = document.querySelector("input[name='password1']");
+      const password2Input = document.querySelector("input[name='password2']");
+
       if (!isValidName(fnameInput.value)) {
         event.preventDefault();
         showModal("Please enter a valid first name without numbers.");
@@ -187,6 +190,20 @@
         lnameInput.focus();
         return;
       }
+
+      if (!isValidPasswordLength(password1Input.value) || !isValidPasswordLength(password2Input.value)) {
+            event.preventDefault();
+            showModal("Passwords must contain at least 8 characters.");
+            password1Input.focus();
+            return;
+        }
+
+      if (isNumeric(password1Input.value) || isNumeric(password2Input.value)) {
+          event.preventDefault();
+          showModal("Passwords cannot be entirely numeric.");
+          password1Input.focus();
+          return;
+      }
     });
 
     function showModal(message) {
@@ -197,6 +214,14 @@
 
     function isValidName(name) {
       return /^[A-Za-z]+$/.test(name);
+    }
+
+    function isValidPasswordLength(password) {
+        return password.length >= 8;
+    }
+
+    function isNumeric(str) {
+        return /^\d+$/.test(str);
     }
   });
 </script>
