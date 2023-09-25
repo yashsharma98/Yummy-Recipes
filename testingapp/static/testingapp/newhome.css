@@ -557,6 +557,9 @@ header h1{
     padding: 10px;
     padding-top: 0;
     padding-left: 5px;
+}
+
+.all-recipes-card-container-secondary{
     margin-top: -15px;
 }
 
@@ -2922,10 +2925,6 @@ div.desc {
     width: 100%;
 }
 
-.all-recipes-cards:nth-child(4){
-    margin-top: auto;
-}
-
 
 
 /* trending page ends */
@@ -2974,11 +2973,12 @@ div.desc {
     display: flex;
     flex-wrap: wrap;
     padding: 0;
+    margin-top: -15px;
 }
 
-.explore-recipes-card-container .all-recipes-cards:nth-child(4){
+/* .explore-recipes-card-container .all-recipes-cards:nth-child(4){
     margin-top: 0;
-}
+} */
 
 .explore-tab{
     background: var(--white);
