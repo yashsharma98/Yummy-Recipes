@@ -68,7 +68,6 @@
                     {% for post in spotlight_list %}
 
                         {% if post.date_post.day == date.day and post.date_post.month == date.month %}
-                        <p>Spotlight on recipes will appear here.</p>
 
                         {% else %}
                             <button type="button" class="btn btn-warning spotlight-btn" data-bs-toggle="modal" data-bs-target="#spotlightModal{{post.pk}}">
