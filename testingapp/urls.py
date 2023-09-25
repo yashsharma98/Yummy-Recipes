@@ -29,7 +29,7 @@ urlpatterns = [
     
     path('login/',views.login_view,name="login"),   
     
-    path('recipe/<pk>',views.topostlogin,name="topostlogin"),
+    path('login_required/<pk>',views.topostlogin,name="topostlogin"),
     
     path('signup/',views.signup_view,name="signup"),
     
