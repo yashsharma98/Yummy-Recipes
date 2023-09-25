@@ -55,6 +55,10 @@
                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
                       <img src="{{ post.image.url }}" class="d-block carousel-image" alt="{{ post.title }}">
                     </div>
+                    {% empty %}
+                    <div>
+                      <img src="{% static 'testingapp/media/empty4.jpg' %}" class="d-block carousel-image" alt="{{ post.title }}">
+                    </div>
                     {% endfor %}
                   </div>
 
@@ -546,8 +550,10 @@
 
                   <h1>More snacks recipes</h1>
 
-                  {% else %}
-                    <h1>More dinner recipes</h1>
+                  {% elif post.type == 'dinner' %}
+
+                  <h1>More dinner recipes</h1>
+
                   {% endif %}
                 </div>
 

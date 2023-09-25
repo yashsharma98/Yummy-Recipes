@@ -19,30 +19,6 @@
 {% block sm_weather %}
 {% endblock %}
 
-{% block dashtopnav_title %}
-
-    {% if hour < 4 %}
-    <a class="navbar-brand appname-align" id="navbar-appname" href="{% url 'dash' %}"><span class="material-symbols-rounded bedtime-icon" id="dropdown-icons">hotel</span>It's bedtime</a>
-
-    {% elif hour < 12 %}
-    <a class="navbar-brand appname-align" id="navbar-appname" href="{% url 'dash' %}"><img src="{% static 'testingapp/media/sun.gif' %}" alt="gif" class="toaster2"> Good morning, {{ user.first_name}}</a>
-
-
-    {% elif hour < 17 %} <!-- 12pm - 4:59pm (17:59) -->
-    <a class="navbar-brand appname-align" id="navbar-appname" href="{% url 'dash' %}">It's lunch time</a>
-
-
-    {% elif hour < 19 %} <!-- 5pm - 7:59pm (19:59) -->
-    <a class="navbar-brand appname-align" id="navbar-appname" href="{% url 'dash' %}"><img src="{% static 'testingapp/media/sun.gif' %}" alt="gif" class="toaster2"> It's evening snack time</a>
-
-
-    {% else %}
-    <a class="navbar-brand appname-align" id="navbar-appname" href="{% url 'dash' %}">It's already dinner time</a>
-    
-    {% endif %}
-
-{% endblock %}
-
 
 {% block content%}
 

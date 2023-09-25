@@ -68,6 +68,7 @@
                     {% for post in spotlight_list %}
 
                         {% if post.date_post.day == date.day and post.date_post.month == date.month %}
+                        <p>Spotlight on recipes will appear here.</p>
 
                         {% else %}
                             <button type="button" class="btn btn-warning spotlight-btn" data-bs-toggle="modal" data-bs-target="#spotlightModal{{post.pk}}">
@@ -1100,7 +1101,7 @@
                                     
                                         {% if post.pk in historys_pk %}
                                         
-                                            <div class="recipe-cards all-recipes-cards card">
+                                            <div class="recipe-cards all-recipes-cards">
 
                                                 <a href="{% url 'viewpost' post.pk %}">
                                                     <div class="img-container in-history">
@@ -1439,6 +1440,8 @@
                     {% if forloop.counter0 == 0 %}
                         <img src="{{ i.image.url }}" class="card-img" alt="...">
                     {% endif %}
+                    {% empty %}
+                        <img src="{% static 'testingapp/media/empty4.jpg' %}" class="card-img" alt="">
                     {% endfor %}
                     <div class="card-img-overlay">
                         <div class="d-block image-text">

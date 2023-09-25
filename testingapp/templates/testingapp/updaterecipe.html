@@ -10,37 +10,13 @@
 
 
 {% block title %}
-<title>Editing {{form.title.value}}</title>
+<title>Update '{{form.title.value}}'</title>
 {% endblock %}
 
 {% block weather_widget %}
 {% endblock %}
 
 {% block sm_weather %}
-{% endblock %}
-
-{% block dashtopnav_title %}
-
-    {% if hour < 4 %}
-    <a class="navbar-brand appname-align" id="navbar-appname" href="{% url 'dash' %}"><span class="material-symbols-rounded bedtime-icon" id="dropdown-icons">hotel</span>It's bedtime</a>
-
-    {% elif hour < 12 %}
-    <a class="navbar-brand appname-align" id="navbar-appname" href="{% url 'dash' %}"><img src="{% static 'testingapp/media/sun.gif' %}" alt="gif" class="toaster2"> Good morning, {{ user.first_name}}</a>
-
-
-    {% elif hour < 17 %} <!-- 12pm - 4:59pm (17:59) -->
-    <a class="navbar-brand appname-align" id="navbar-appname" href="{% url 'dash' %}">It's lunch time</a>
-
-
-    {% elif hour < 19 %} <!-- 5pm - 7:59pm (19:59) -->
-    <a class="navbar-brand appname-align" id="navbar-appname" href="{% url 'dash' %}"><img src="{% static 'testingapp/media/sun.gif' %}" alt="gif" class="toaster2"> It's evening snack time</a>
-
-
-    {% else %}
-    <a class="navbar-brand appname-align" id="navbar-appname" href="{% url 'dash' %}">It's already dinner time</a>
-    
-    {% endif %}
-
 {% endblock %}
 
 
@@ -171,8 +147,11 @@
                       {% empty %}
                       
                         <div class="image-field">
+                          <div class="empty-image">
+                            <img src="{% static 'testingapp/media/empty4.jpg' %}" alt="placeholder image">
+                          </div>  
                           <label for="id_form-0-image" name="form-0-image" class="border form-label img-input-btn">
-                            <span class="material-symbols-rounded upload-img-icon">upload</span> <span class="preview-counter">When no image</span>
+                            <span class="material-symbols-rounded upload-img-icon">upload</span> <span class="preview-counter">Add image</span>
                           </label>
                           <div class="col-sm-11 input-field">
                             <input class="form-control image-input" type="file" name="form-0-image" accept="image/*" id="id_form-0-image">

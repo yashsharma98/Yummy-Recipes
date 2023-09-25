@@ -8,51 +8,10 @@
 <title>Home</title>
 {% endblock %}
 
-
 {% block weather_widget %}
-    <li class="nav-item">
-        <div class="rightside-searchbar">
-            <div class="weather-widget">
-                <div class="container">
+{% endblock %}
 
-                    {% if user.userlocation.location == '' %}
-
-                    <div class="row" data-bs-toggle="modal" data-bs-target="#weatherModal" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Click to add location">
-                        <div class="col-1" style="padding: 0">
-                            <span class="material-symbols-rounded"  data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Click to add location" style="padding: 0;padding-left:5px;display: inline-block;vertical-align: middle;position: relative;bottom: 2px;font-size: 1.15em;">add_location</span> 
-                        </div>
-
-                    </div>
-                    
-
-                    {% else %}
-
-                    <div data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Current weather">
-
-                        <div class="row" data-bs-toggle="modal" data-bs-target="#weatherModal">
-                            <div class="col-4" style="padding: 0">
-                                <img id="navbarweatherIcon">
-                            </div>
-
-                            <div class="col-6" style="padding: 0;padding-left:5px;display: flex;align-items: center;">
-                                <span id="navbartemperature"></span> &nbsp; <span>°C</span> 
-                            </div>
-
-                            <!-- <div class="col-2 change-location" style="padding: 0;display: flex;align-items: center;">
-                                <span class="material-symbols-rounded" style="font-size: 1em;">location_on</span>
-                            </div> -->
-
-                        </div>
-
-                    </div>
-                    
-                    {% endif %}
-
-
-                </div>
-            </div>
-        </div>
-    </li>
+{% block sm_weather %}
 {% endblock %}
 
 {% block content%}
