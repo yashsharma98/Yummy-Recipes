@@ -118,10 +118,10 @@
                                         <div class="d-flex history-list-body">
                                             {% for i in post.photo_set.all %}
                                                 {% if forloop.counter0 == 0 %}
-                                                    <img src="{{ i.image.url }}" class="flex-shrink-0 me-3 recipe-img" style="width: 140px;height: 90px;border-radius: 10px;" alt="...">
+                                                    <img src="{{ i.image.url }}" class="flex-shrink-0 me-3 recipe-img" style="width: 140px;height: 90px;border-radius: 10px;" alt="recipe-image">
                                                 {% endif %}
                                                 {% empty %}
-                                                    <img src="{% static 'testingapp/media/empty4.jpg' %}" class="recipe-img">
+                                                    <img src="{% static 'testingapp/media/empty4.jpg' %}" class="flex-shrink-0 me-3 recipe-img" style="width: 140px;height: 90px;border-radius: 10px;" alt="recipe-image">
                                             {% endfor %}
                                             <div class="list-content-body">
 
@@ -130,7 +130,7 @@
                                                 <p class="recipe-timestamp">{{timestamp}} </p> 
                                                 <!-- - {{todays_date}} -->
 
-                                                <p class="recipe-timestamp">{{post.author}}</p>
+                                                <!-- <p class="recipe-timestamp">{{post.author}}</p> -->
 
                                                 <div class="single-recipe-delete">         
                                                     <div class="btn-group me-2 delete-link" role="group" aria-label="Second group">
@@ -166,7 +166,7 @@
                                                     <img src="{{ i.image.url }}" class="flex-shrink-0 me-3 recipe-img" style="width: 140px;height: 90px;border-radius: 10px;" alt="...">
                                                 {% endif %}
                                                 {% empty %}
-                                                    <img src="{% static 'testingapp/media/empty4.jpg' %}" class="recipe-img">
+                                                    <img src="{% static 'testingapp/media/empty4.jpg' %}" class="flex-shrink-0 me-3 recipe-img" style="width: 140px;height: 90px;border-radius: 10px;" alt="recipe-image">
                                             {% endfor %}
                                             <div class="list-content-body">
 
@@ -211,7 +211,7 @@
                                                     <img src="{{ i.image.url }}" class="flex-shrink-0 me-3 recipe-img" style="width: 140px;height: 90px;border-radius: 10px;" alt="...">
                                                 {% endif %}
                                                 {% empty %}
-                                                    <img src="{% static 'testingapp/media/empty4.jpg' %}" class="recipe-img">
+                                                    <img src="{% static 'testingapp/media/empty4.jpg' %}" class="flex-shrink-0 me-3 recipe-img" style="width: 140px;height: 90px;border-radius: 10px;" alt="recipe-image">
                                             {% endfor %}
                                             <div class="list-content-body">
 
@@ -256,7 +256,7 @@
                                                     <img src="{{ i.image.url }}" class="flex-shrink-0 me-3 recipe-img" style="width: 140px;height: 90px;border-radius: 10px;" alt="...">
                                                 {% endif %}
                                                 {% empty %}
-                                                    <img src="{% static 'testingapp/media/empty4.jpg' %}" class="recipe-img">
+                                                    <img src="{% static 'testingapp/media/empty4.jpg' %}" class="flex-shrink-0 me-3 recipe-img" style="width: 140px;height: 90px;border-radius: 10px;" alt="recipe-image">
                                             {% endfor %}
                                             <div class="list-content-body">
 
